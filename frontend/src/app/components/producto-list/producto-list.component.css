@@ -1,0 +1,129 @@
+.producto-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #fdfdfd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.btn-nuevo {
+  display: block;
+  margin: 0 auto 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-nuevo:hover {
+  background-color: #45a049;
+}
+
+.producto-list {
+  list-style: none;
+  padding: 0;
+}
+
+.producto-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.precio {
+  color: #00796b;
+  font-weight: bold;
+}
+
+.btn-editar {
+  padding: 0.3rem 0.8rem;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-editar:hover {
+  background-color: #1976d2;
+}
+
+.botones {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn-ver {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-editar {
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.producto-card {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.producto-imagen {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.producto-info {
+  flex-grow: 1;
+}
+
+.botones {
+  margin-top: 10px;
+}
+
+.botones button {
+  margin-right: 8px;
+}

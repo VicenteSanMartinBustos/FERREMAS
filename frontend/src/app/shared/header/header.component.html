@@ -1,0 +1,28 @@
+<header class="navbar">
+  <button (click)="irAlInicio()" class="logo">FERREMAS</button>
+
+  <nav class="nav-links">
+    <a routerLink="/" *ngIf="!isLoggedIn()">Inicio</a>
+    <a routerLink="/login" *ngIf="!isLoggedIn()">Iniciar sesión</a>
+    <a routerLink="/register" *ngIf="!isLoggedIn()">Registrarse</a>
+    <a (click)="logout()" *ngIf="isLoggedIn()">Cerrar sesión</a>
+  </nav>
+  
+
+  <div class="carrito-container" (mouseenter)="mostrarResumenCarritoHandler()" (mouseleave)="ocultarResumenCarritoHandler()">
+    <a routerLink="/carrito" class="carrito-icono">
+      🛒 <span *ngIf="totalCantidad > 0" class="carrito-contador">{{ totalCantidad }}</span>
+    </a>
+  
+    <div class="carrito-resumen" *ngIf="mostrarResumen && totalCantidad > 0">
+      <h3>Tu Carrito</h3>
+      <ul>
+        <li *ngFor="let item of items">
+          {{ item.nombre }} x{{ item.cantidad }} - ${{ item.precio * item.cantidad }}
+        </li>
+      </ul>
+      <div class="total">Total: ${{ total }}</div>
+      <button (click)="irAlCarrito()">Ir al carrito</button>
+    </div>
+  </div>
+</header>

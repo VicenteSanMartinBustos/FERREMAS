@@ -1,0 +1,23 @@
+<div class="producto-container">
+  <h2>📦 Lista de Productos</h2>
+  <button class="btn-nuevo" [routerLink]="['/productos/nuevo']">+ Nuevo Producto</button>
+
+  <ul class="producto-list">
+    <li *ngFor="let p of productos" class="producto-card">
+      <img *ngIf="p.imagen" [src]="p.imagen" alt="{{ p.nombre }}" class="producto-imagen" />
+      
+      <div class="producto-info">
+        <strong>{{ p.nombre }}</strong><br />
+        Precio: <span class="precio">${{ p.precio }}</span><br />
+
+        <div class="botones">
+          <button class="btn-ver" (click)="verProducto(p)">Ver</button>
+          <button class="btn-editar" [routerLink]="['/productos/editar', p.id]">Editar</button>
+          <button class="btn-eliminar" (click)="eliminarProducto(p.id)">Eliminar</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+

@@ -1,0 +1,62 @@
+
+
+  <h2 class="titulo-productos">
+    <span class="titulo-icono"><i class="fas fa-shopping-cart"></i></span>
+    <span class="titulo-texto">Productos Disponibles</span>
+  </h2>
+
+  <div class="grid-productos">
+    <div class="card-producto" *ngFor="let p of productos">
+      <!-- Badge para productos con stock bajo -->
+      <div class="card-badge stock-bajo" *ngIf="p.stock <= 5 && p.stock > 0">
+        <i class="fas fa-exclamation-circle"></i> Últimas {{p.stock}} unidades
+      </div>
+      
+      <!-- Imagen del producto -->
+      <img *ngIf="p.imagen" [src]="p.imagen" alt="{{ p.nombre }}" class="card-imagen" />
+      
+      <div class="card-contenido">
+        <!-- Nombre del producto -->
+        <h3 class="card-titulo">{{ p.nombre }}</h3>
+        
+        <!-- Precio -->
+        <div class="card-precio">
+          <span class="precio-actual">
+            <i class="fas fa-tag"></i> ${{ formatearPrecio(p.precio) }}
+          </span>
+        </div>
+        
+        <!-- Stock -->
+        <div class="card-stock">
+          <i class="fas fa-box-open"></i> 
+          <span *ngIf="p.stock > 5">Disponible</span>
+          <span *ngIf="p.stock === 0" class="agotado">Agotado</span>
+        </div>
+        
+        <!-- Selector de cantidad y botón -->
+        <div class="card-acciones">
+          <div class="cantidad-selector" *ngIf="p.stock > 0">
+            <button class="cantidad-btn" (click)="decrementarCantidad(p)" [disabled]="cantidades[p.id] <= 1">
+              <i class="fas fa-minus"></i>
+            </button>
+            <input type="number" [(ngModel)]="cantidades[p.id]" min="1" [max]="p.stock" 
+                  class="cantidad-input" (change)="validarCantidad(p)"/>
+            <button class="cantidad-btn" (click)="incrementarCantidad(p)" [disabled]="cantidades[p.id] >= p.stock">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          
+          <button class="card-btn" (click)="agregarAlCarrito(p)" [disabled]="p.stock == 0">
+            <i class="fas fa-cart-plus"></i>
+            {{ p.stock <= 0 ? 'Agotado' : 'Añadir' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+

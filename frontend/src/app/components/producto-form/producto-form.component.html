@@ -1,0 +1,27 @@
+<div class="form-container">
+  <h2>{{ id ? 'Actualizar Producto' : 'Crear Producto' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" formControlName="nombre" type="text" />
+
+    <label for="descripcion">Descripción:</label>
+    <input id="descripcion" formControlName="descripcion" type="text" />
+
+    <label for="precio">Precio:</label>
+    <input id="precio" formControlName="precio" type="number" />
+
+    <label for="stock">Stock:</label>
+    <input id="stock" formControlName="stock" type="number" />
+
+    <label for="imagen">Imagen:</label>
+    <input type="file" (change)="onFileChange($event)" />
+
+
+
+    <div class="form-buttons">
+      <button type="submit">{{ id ? 'Actualizar' : 'Crear' }}</button>
+      <button type="button" (click)="volver()">Cancelar</button>
+    </div>
+  </form>
+</div>

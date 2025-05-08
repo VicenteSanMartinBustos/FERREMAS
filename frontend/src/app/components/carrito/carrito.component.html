@@ -1,0 +1,27 @@
+<div class="carrito-container" *ngIf="items.length > 0; else noItems">
+
+  <h2>Carrito de Compras</h2>
+
+  <div class="carrito-items">
+    <div *ngFor="let item of items" class="item">
+      <img [src]="item.imagen" alt="{{ item.nombre }}" class="producto-imagen" />
+      <div class="item-detalle">
+        <h3>{{ item.nombre }}</h3>
+        <p>Precio: ${{ item.precio }}</p>
+        <p>Cantidad: {{ item.cantidad }}</p>
+        <p>Total: ${{ item.precio * item.cantidad }}</p>
+        <button class="btn-eliminar" (click)="eliminarProducto(item.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="carrito-total">
+    <h3>Total a pagar: ${{ total }}</h3>
+    <button class="btn-pago">Proceder al pago</button>
+  </div>
+</div>
+
+<ng-template #noItems>
+  <p class="carrito-vacio">No hay productos en el carrito.</p>
+</ng-template>
+
