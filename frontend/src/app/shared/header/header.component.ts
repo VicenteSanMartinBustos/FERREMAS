@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
-  
 })
 export class HeaderComponent implements OnInit {
   items: ItemCarrito[] = [];
@@ -18,6 +17,7 @@ export class HeaderComponent implements OnInit {
   total = 0;
   mostrarResumen = false;
   mostrarMenuCuenta = false;
+  tipoCambio = 1;
 
   constructor(private carritoService: CarritoService, private router: Router) {}
 
@@ -27,6 +27,13 @@ export class HeaderComponent implements OnInit {
       this.totalCantidad = data.reduce((sum, item) => sum + item.cantidad, 0);
       this.total = data.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
     });
+
+    fetch('http://localhost:8000/api/dolar/')
+      .then(res => res.json())
+      .then(data => {
+        this.tipoCambio = data.valor;
+      })
+      .catch(err => console.error('Error al obtener tipo de cambio:', err));
   }
 
   irAlCarrito() {
@@ -40,27 +47,25 @@ export class HeaderComponent implements OnInit {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
-  
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 
-  // Métodos para el menú de cuenta
-mostrarMenuCuentaHandler() {
-  this.mostrarMenuCuenta = true;
-}
+  mostrarMenuCuentaHandler() {
+    this.mostrarMenuCuenta = true;
+  }
 
-ocultarMenuCuentaHandler() {
-  this.mostrarMenuCuenta = false;
-}
+  ocultarMenuCuentaHandler() {
+    this.mostrarMenuCuenta = false;
+  }
 
-// Métodos para el carrito
-mostrarResumenCarritoHandler() {
-  this.mostrarResumen = true;
-}
+  mostrarResumenCarritoHandler() {
+    this.mostrarResumen = true;
+  }
 
-ocultarResumenCarritoHandler() {
-  this.mostrarResumen = false;
-}
+  ocultarResumenCarritoHandler() {
+    this.mostrarResumen = false;
+  }
 }

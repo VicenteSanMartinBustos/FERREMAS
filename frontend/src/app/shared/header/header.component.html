@@ -7,21 +7,30 @@
     <a routerLink="/register" *ngIf="!isLoggedIn()">Registrarse</a>
     <a (click)="logout()" *ngIf="isLoggedIn()">Cerrar sesión</a>
   </nav>
-  
 
   <div class="carrito-container" (mouseenter)="mostrarResumenCarritoHandler()" (mouseleave)="ocultarResumenCarritoHandler()">
     <a routerLink="/carrito" class="carrito-icono">
       🛒 <span *ngIf="totalCantidad > 0" class="carrito-contador">{{ totalCantidad }}</span>
     </a>
-  
+
     <div class="carrito-resumen" *ngIf="mostrarResumen && totalCantidad > 0">
       <h3>Tu Carrito</h3>
       <ul>
         <li *ngFor="let item of items">
-          {{ item.nombre }} x{{ item.cantidad }} - ${{ item.precio * item.cantidad }}
+          <img [src]="item.imagen" alt="{{ item.nombre }}" class="item-imagen" />
+          <div class="item-info">
+            <div class="item-nombre">{{ item.nombre }}</div>
+            <div class="item-detalles">
+              {{ item.cantidad }} x ${{ item.precio }} CLP<br />
+              <span class="precio-usd">USD {{ (item.precio / tipoCambio).toFixed(2) }}</span>
+            </div>
+          </div>
         </li>
       </ul>
-      <div class="total">Total: ${{ total }}</div>
+      <div class="total">
+        Total: ${{ total }} CLP<br />
+        <span class="total-usd">USD {{ (total / tipoCambio).toFixed(2) }}</span>
+      </div>
       <button (click)="irAlCarrito()">Ir al carrito</button>
     </div>
   </div>

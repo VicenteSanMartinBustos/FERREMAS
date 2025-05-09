@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+/* En tu archivo global styles.css o styles.scss */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: 
+    linear-gradient(
+      135deg,
+      rgba(26, 26, 26, 0.98) 0%,
+      rgba(44, 44, 44, 0.97) 100%
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(255, 107, 107, 0.08) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(255, 163, 163, 0.05) 0%,
+      transparent 30%
+    );
+  background-attachment: fixed;
+}
+
+/* Efecto de iluminación sutil al pasar el ratón en elementos */
+.card:hover, 
+.section:hover {
+  box-shadow: 0 0 0 1px rgba(255, 107, 107, 0.2);
+}
+
+/* Transición entre páginas */
+router-outlet + * {
+  animation: fadeIn 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Ajuste para el contenido principal */
+main {
+  padding: 2rem 5%;
+  min-height: calc(100vh - 120px);
+}
