@@ -11,11 +11,14 @@ import {
   faEyeSlash,
   faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
+import { RouterModule } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, FontAwesomeModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -35,6 +38,11 @@ export class LoginComponent {
   faExclamationCircle = faExclamationCircle;
 
   constructor(private http: HttpClient, private router: Router) {}
+  
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;

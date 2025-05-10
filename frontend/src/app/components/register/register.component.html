@@ -54,7 +54,7 @@
       </div>
 
       <div class="login-footer">
-        <p>¿Ya tienes una cuenta? <a routerLink="/login" class="register-link">Inicia sesión aquí</a></p>
+        <p>¿Ya tienes una cuenta? <a [routerLink]="['/login']" *ngIf="!isLoggedIn()" class="register-link">Inicia Sesión Aquí</a></p>
       </div>
     </form>
   </div>

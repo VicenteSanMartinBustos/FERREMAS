@@ -14,8 +14,8 @@
       </button>
       
       <div class="account-menu" *ngIf="mostrarMenuCuenta">
-        <a routerLink="/login" *ngIf="!isLoggedIn()">Iniciar sesión</a>
-        <a routerLink="/register" *ngIf="!isLoggedIn()">Registrarse</a>
+        <a [routerLink]="['/login']" *ngIf="!isLoggedIn()">Iniciar sesión</a>
+        <a [routerLink]="['/register']" *ngIf="!isLoggedIn()">Registrarse</a>
         
         <div *ngIf="isLoggedIn()" class="logged-in-menu">
           <div class="user-info">

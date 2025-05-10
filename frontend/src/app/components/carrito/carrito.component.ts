@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faShoppingCart, faCreditCard, faTrashAlt, faMinus, faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, RouterModule],
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.css']
 })
