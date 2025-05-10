@@ -45,8 +45,10 @@ export class CarritoComponent implements OnInit {
   }
 
   incrementarCantidad(item: ItemCarrito) {
+  if (item.cantidad < item.stockDisponible) {
     this.carritoService.actualizarCantidad(item.id, item.cantidad + 1);
   }
+}
 
   decrementarCantidad(item: ItemCarrito) {
     if (item.cantidad > 1) {
