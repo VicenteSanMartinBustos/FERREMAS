@@ -43,3 +43,17 @@ agregar la api del dolar para que los productos se muestren en dolares, puede se
 IMPORTANTE: proceder al pago lo dejaremos al final, ya que tambien requiere implementar ciertas reglas especificas.
 
 !: RESPETAR LAS REGLAS DE NEGOCIO DE LOS DOCX DEL CASO.
+------------------------------------------------------------------------------------------------
+09/05/2025 22:29
+
+por hacer: 
+1) Enlazar las rutas de las paginas para navegar con facilidad (incluye todos los links y botones).
+2) En el apartado de carrito, si un producto se queda sin stock, en el boton de agregar, deja
+   agregar mas productos (por ej si pintura roja tiene stock de 8, en el localhost:4200/carrito, deja
+   agregar mas productos de los que existen, arreglar eso.)
+3) Implementar el apartado de "ver cuenta", tiene que mostrar: nombre, contraseña con el visibility apagado por default y el email.
+4) añadir las cuentas de los usuarios con sus respectivos permisos.
+5) hacer mantenedor (crud) de los usuarios
+6) hacer apartado de "olvidaste tu contraseña" para reestablecerla (se puede usar una api sencilla)
+
+eso es todo.

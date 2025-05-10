@@ -1,3 +1,4 @@
+/* Estilos generales del navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -12,102 +13,165 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.navbar:hover {
-  background: rgba(25, 25, 25, 0.98);
-  border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
 .logo {
   font-size: 2rem;
   font-weight: 800;
-  text-decoration: none;
+  color: #fffefe;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Kanit', sans-serif;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  font-size: 2rem;
+  font-weight: 800;
   color: transparent;
   background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
   -webkit-background-clip: text;
   background-clip: text;
   text-shadow: 0 2px 10px rgba(255, 154, 158, 0.2);
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.5px;
-}
-
-.logo:hover {
-  transform: scale(1.05);
-  text-shadow: 0 4px 20px rgba(255, 154, 158, 0.4);
 }
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: center;
 }
 
-.nav-links a {
+.nav-links > a {
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   font-weight: 500;
   font-size: 1.1rem;
-  position: relative;
-  padding: 0.5rem 0;
-  transition: all 0.4s ease;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
 }
 
-.nav-links a::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4);
-  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  border-radius: 2px;
-}
-
-.nav-links a:hover {
+.nav-links > a:hover {
   color: #ffffff;
 }
 
-.nav-links a:hover::before {
-  width: 100%;
+/* Estilos del menú de cuenta */
+.account-menu-container {
+  position: relative;
 }
 
-/* Estilos mejorados para el carrito */
+.account-icon {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.account-icon i {
+  font-size: 1.4rem;
+}
+
+.account-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.account-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  min-width: 200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 1rem 0;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.account-menu-container:hover .account-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.account-menu a {
+  display: block;
+  padding: 0.7rem 1.5rem;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.account-menu a:hover {
+  background: #f5f5f5;
+  color: #000;
+}
+
+.logged-in-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info {
+  padding: 0.7rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 0.5rem;
+}
+
+.user-info h4 {
+  margin: 0 0 0.3rem 0;
+  color: #222;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Estilos del carrito mejorado */
 .carrito-container {
   position: relative;
-  margin-left: 1.5rem;
 }
 
-.carrito-icono {
-  cursor: pointer;
-  font-size: 1.8rem;
+.carrito-btn {
+  background: none;
+  border: none;
   color: rgba(255, 255, 255, 0.85);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
   position: relative;
-  padding: 0.5rem;
-  display: inline-block;
-  text-decoration: none;
 }
 
-.carrito-icono:hover {
+.carrito-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
-  transform: translateY(-3px) scale(1.1);
+}
+
+.carrito-btn i {
+  font-size: 1.4rem;
 }
 
 .carrito-contador {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-  color: #1a1a1a;
+  background: #ff6be4;
+  color: white;
   border-radius: 50%;
   width: 22px;
   height: 22px;
@@ -116,147 +180,127 @@
   justify-content: center;
   font-size: 0.75rem;
   font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.carrito-icono:hover .carrito-contador {
-  transform: scale(1.1);
+  position: absolute;
+  top: -5px;
+  right: -5px;
 }
 
 .carrito-resumen {
   position: absolute;
-  top: 150%;
+  top: 100%;
   right: 0;
   background: #ffffff;
-  padding: 1.8rem;
-  width: 380px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  width: 350px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
   z-index: 1000;
-  border-radius: 16px;
-  font-size: 0.95rem;
-  color: #1a1a1a;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px) scale(0.95);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.carrito-container:hover .carrito-resumen {
+.carrito-container:hover .carrito-resumen,
+.carrito-container.active .carrito-resumen {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
-}
-
-.carrito-resumen::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  right: 20px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent white transparent;
-  filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.05));
-}
-
-.carrito-resumen h3 {
-  margin: 0 0 1.5rem 0;
-  font-size: 1.3rem;
-  color: #1a1a1a;
-  font-weight: 700;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.carrito-resumen ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.5rem 0;
-  max-height: 300px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #e0e0e0 #f5f5f5;
-}
-
-.carrito-resumen ul::-webkit-scrollbar {
-  width: 6px;
-}
-
-.carrito-resumen ul::-webkit-scrollbar-track {
-  background: #f5f5f5;
-  border-radius: 10px;
-}
-
-.carrito-resumen ul::-webkit-scrollbar-thumb {
-  background: #e0e0e0;
-  border-radius: 10px;
-}
-
-.carrito-resumen li {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.2rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.carrito-resumen li:hover {
-  transform: translateX(5px);
-}
-
-.carrito-resumen .total {
-  font-weight: 700;
-  margin: 1.8rem 0;
-  text-align: right;
-  font-size: 1.2rem;
-  color: #1a1a1a;
-}
-
-.carrito-resumen button {
-  width: 100%;
-  padding: 1rem;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-  color: #1a1a1a;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.5px;
-}
-
-.carrito-resumen button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4);
-}
-
-.carrito-resumen button:active {
   transform: translateY(0);
 }
 
-.item-imagen {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-right: 15px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+.carrito-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.carrito-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.close-carrito {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.close-carrito:hover {
+  color: #333;
+}
+
+.carrito-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  color: #999;
+}
+
+.empty-cart i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.empty-cart p {
+  margin: 0;
+}
+
+.carrito-footer {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.total {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: right;
+  color: #333;
+}
+
+.total-usd {
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: normal;
+}
+
+.btn-ir-carrito {
+  width: 100%;
+  padding: 0.8rem;
+  background: #ff6be4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
   transition: all 0.3s ease;
 }
 
-.carrito-resumen li:hover .item-imagen {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+.btn-ir-carrito:hover {
+  background: #ff4fd7;
 }
 
-.carrito-resumen li {
-  display: flex;
-  align-items: center;
+.item-imagen {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1rem;
 }
 
 .item-info {
@@ -264,51 +308,38 @@
 }
 
 .item-nombre {
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 500;
+  color: #333;
   margin-bottom: 0.3rem;
-  font-size: 1rem;
 }
 
 .item-detalles {
   font-size: 0.9rem;
   color: #666;
-  line-height: 1.4;
 }
 
-.precio-usd,
-.total-usd {
-  font-size: 0.85rem;
-  color: #888;
-  display: block;
-  margin-top: 2px;
+.precio-usd {
+  font-size: 0.8rem;
+  color: #999;
 }
 
-/* Efecto de hover en el contenedor del carrito */
-.carrito-container {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.carrito-container:hover {
-  transform: translateY(-2px);
-}
-
-/* Responsive design para pantallas más pequeñas */
+/* Responsive */
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
   }
   
   .nav-links {
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .account-icon span,
+  .carrito-btn span {
+    display: none;
   }
   
   .carrito-resumen {
     width: 300px;
     right: -50px;
-  }
-  
-  .carrito-resumen::before {
-    right: 60px;
   }
 }

@@ -1,35 +1,168 @@
 /* ============== ESTILOS GENERALES ============== */
 .container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 1rem;
 }
-
-/* ============== ESTILOS DEL ENCABEZADO ============== */
-.titulo-productos {
+/* Banner FERREMAS - Estilo Neón Rosa Pastel */
+.banner-bienvenida {
+  background: 
+    linear-gradient(135deg, 
+      #000000 0%, 
+      #1a0a14 40%, 
+      #2d0b1f 100%);
+  color: #ffb6e6;
+  padding: 3.5rem 2rem;
   text-align: center;
-  margin: 2rem 0;
-  color: #2c3e50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  font-size: 1.8rem;
+  margin-bottom: 3rem;
+  border-radius: 8px;
+  border: 1px solid #ff9ee0;
+  box-shadow: 
+    0 0 10px rgba(255, 158, 224, 0.4),
+    0 0 20px rgba(255, 158, 224, 0.2),
+    inset 0 0 10px rgba(255, 158, 224, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-bienvenida::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle, 
+      rgba(255, 182, 230, 0.1) 0%, 
+      transparent 70%);
+  animation: rotateGlow 15s linear infinite;
+}
+
+.banner-bienvenida h1 {
+  font-size: 3rem;
+  margin-bottom: 1.2rem;
+  color: #ffd6f7; /* Rosa pastel */
+  text-shadow: 
+    0 0 5px #ffb6e6,
+    0 0 15px #ff8ed6,
+    0 0 25px #ff66c4;
+  font-weight: 700;
+  letter-spacing: 2px;
+  position: relative;
+  animation: textPulse 2s ease-in-out infinite alternate;
+}
+
+.banner-subtitle {
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #ffe6f7; /* Rosa pastel más claro */
+  text-shadow: 0 0 8px rgba(255, 182, 230, 0.6);
+  line-height: 1.6;
   position: relative;
 }
 
-.titulo-productos::after {
+/* Efecto de divisor neón */
+.banner-subtitle::after {
   content: '';
   display: block;
-  width: 100px;
-  height: 3px;
-  background: #3498db;
-  margin: 1rem auto 0;
+  width: 150px;
+  height: 2px;
+  background: #ff9ee0;
+  margin: 1.5rem auto;
+  box-shadow: 0 0 10px #ff66c4;
+}
+
+/* Tipografía */
+.banner-bienvenida h1 {
+  font-family: 'Kanit', sans-serif;
+  text-transform: uppercase;
+}
+
+.banner-subtitle {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 300;
+}
+
+/* Efecto de herramientas neón (opcional) */
+.banner-bienvenida::after {
+  content: '⚙️🔧';
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  opacity: 0.1;
+  font-size: 2rem;
+  filter: drop-shadow(0 0 5px #ff8ed6);
+}
+
+/* Encabezado de Productos Estilo FERREMAS */
+.encabezado-productos {
+  text-align: center;
+  margin: 4rem 0 3rem;
+  padding: 0 1.5rem;
+  position: relative;
+}
+
+.titulo-productos {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
 }
 
 .titulo-icono {
-  color: #3498db;
-  font-size: 1.5em;
+  font-size: 1.8rem;
+  animation: iconPulse 2s ease-in-out infinite alternate;
+}
+
+.subtitulo-productos {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  position: relative;
+}
+
+/* Efecto divisor decorativo */
+.encabezado-productos::after {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 3px;
+  margin: 2rem auto;
+  box-shadow: 0 0 10px #0a0a0a;
+  opacity: 0.7;
+}
+
+
+
+/* Tipografía */
+.titulo-productos {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.subtitulo-productos {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .titulo-productos {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .subtitulo-productos {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
 }
 
 /* ============== ESTILOS DEL TIPO DE CAMBIO ============== */
@@ -93,16 +226,27 @@
 /* ============== ESTILOS DEL GRID DE PRODUCTOS ============== */
 .grid-productos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
   padding: 1rem 0;
   margin: 2rem 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .grid-productos {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .grid-productos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-productos {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -313,38 +457,64 @@
   margin: 0;
 }
 
+/* ============== ESTILOS DEL BOTÓN ============== */
+.card-acciones {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
 .card-btn {
-  flex: 1;
   background: #3498db;
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 0 1rem;
-  cursor: pointer;
+  width: 100%;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-btn i {
+  flex-shrink: 0;
+}
+
+.card-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: 500;
-  height: 40px;
-}
-
-.card-btn:hover {
-  background: #2980b9;
-  transform: translateY(-2px);
-}
-
-.card-btn:active {
-  transform: translateY(0);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .card-btn:disabled {
   background: #95a5a6;
+  color: white;
   cursor: not-allowed;
-  transform: none;
+  position: relative;
 }
 
-.card-btn i {
+.card-btn:disabled i {
+  display: none;
+}
+
+.card-btn:disabled::before {
+  content: "✖";
+  margin-right: 0.3rem;
   font-size: 1rem;
-} 
+}

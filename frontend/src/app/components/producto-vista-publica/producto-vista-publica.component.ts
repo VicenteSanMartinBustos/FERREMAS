@@ -17,12 +17,14 @@ import { RouterModule } from '@angular/router';
 })
 export class ProductoVistaPublicaComponent implements OnInit {
   productos: Producto[] = [];
+  productosDestacados: Producto[] = [];
   cantidades: { [id: number]: number } = {};
   tipoCambio: number | null = null;
   loadingTipoCambio = true;
   errorTipoCambio = false;
   loadingProductos = true;
   errorProductos = false;
+  currentSlide = 0;
 
   constructor(
     private productoService: ProductoService,
@@ -41,7 +43,6 @@ export class ProductoVistaPublicaComponent implements OnInit {
     
     this.tipoCambioService.obtenerTipoCambio().subscribe({
       next: (data: any) => {
-        // Verificación adicional de la estructura
         if (data && typeof data.usd_to_clp === 'number') {
           this.tipoCambio = data.usd_to_clp;
         } else {
@@ -65,6 +66,7 @@ export class ProductoVistaPublicaComponent implements OnInit {
       next: (data) => {
         this.productos = data;
         data.forEach(p => this.cantidades[p.id] = 1);
+        this.seleccionarProductosDestacados();
         this.loadingProductos = false;
       },
       error: (err) => {
@@ -73,6 +75,20 @@ export class ProductoVistaPublicaComponent implements OnInit {
         this.loadingProductos = false;
       }
     });
+  }
+
+  seleccionarProductosDestacados(): void {
+    this.productosDestacados = [...this.productos]
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 5);
+  }
+
+  nextSlide(): void {
+    this.currentSlide = (this.currentSlide + 1) % this.productosDestacados.length;
+  }
+
+  prevSlide(): void {
+    this.currentSlide = (this.currentSlide - 1 + this.productosDestacados.length) % this.productosDestacados.length;
   }
 
   agregarAlCarrito(producto: Producto): void {
@@ -100,7 +116,8 @@ export class ProductoVistaPublicaComponent implements OnInit {
     this.carritoService.agregar(item);
     producto.stock -= cantidad;
     this.cantidades[producto.id] = 1;
-    alert(`${cantidad} ${producto.nombre} añadido(s) al carrito`);
+    
+    // Se eliminó el alert() que mostraba el mensaje de confirmación
   }
 
   validarCantidad(producto: Producto): void {

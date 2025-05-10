@@ -1,27 +1,72 @@
 <div class="carrito-container" *ngIf="items.length > 0; else noItems">
-
-  <h2>Carrito de Compras</h2>
+  <div class="carrito-header">
+    <h2><i class="fas fa-shopping-cart"></i> Tu Carrito de Compras</h2>
+    <span class="items-count">{{items.length}} {{items.length === 1 ? 'producto' : 'productos'}}</span>
+  </div>
 
   <div class="carrito-items">
-    <div *ngFor="let item of items" class="item">
-      <img [src]="item.imagen" alt="{{ item.nombre }}" class="producto-imagen" />
-      <div class="item-detalle">
-        <h3>{{ item.nombre }}</h3>
-        <p>Precio: ${{ item.precio }}</p>
-        <p>Cantidad: {{ item.cantidad }}</p>
-        <p>Total: ${{ item.precio * item.cantidad }}</p>
-        <button class="btn-eliminar" (click)="eliminarProducto(item.id)">Eliminar</button>
+    <div *ngFor="let item of items" class="item-card">
+      <div class="item-imagen-container">
+        <img [src]="item.imagen || 'assets/default-product.png'" alt="{{ item.nombre }}" class="producto-imagen" />
+      </div>
+      
+      <div class="item-info">
+        <h3 class="item-nombre">{{ item.nombre }}</h3>
+        <div class="item-precio">${{ item.precio | number }}</div>
+        
+        <div class="cantidad-control">
+          <button (click)="decrementarCantidad(item)" [disabled]="item.cantidad <= 1" class="cantidad-btn">
+            <i class="fas fa-minus"></i>
+          </button>
+          <span class="cantidad">{{ item.cantidad }}</span>
+          <button (click)="incrementarCantidad(item)" class="cantidad-btn">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="item-subtotal">
+        <div class="subtotal">${{ (item.precio * item.cantidad) | number }}</div>
+        <button (click)="eliminarProducto(item.id)" class="btn-eliminar">
+          <i class="fas fa-trash-alt"></i>
+        </button>
       </div>
     </div>
   </div>
 
-  <div class="carrito-total">
-    <h3>Total a pagar: ${{ total }}</h3>
-    <button class="btn-pago">Proceder al pago</button>
+  <div class="carrito-resumen">
+    <div class="resumen-linea">
+      <span>Subtotal</span>
+      <span>${{ total | number }}</span>
+    </div>
+    <div class="resumen-linea">
+      <span>Envío</span>
+      <span>{{ calcularEnvio() }}</span>
+    </div>
+    <div class="resumen-linea total">
+      <span>Total</span>
+      <span>${{ (total + (total > 50000 ? 0 : 3000)) | number }}</span>
+    </div>
+    
+    <button class="btn-pago" (click)="procederAlPago()">
+      <i class="fas fa-credit-card"></i> Proceder al Pago
+    </button>
+    
+    <div class="continuar-comprando">
+      <a routerLink="/" class="btn-continuar">
+        <i class="fas fa-arrow-left"></i> Seguir Comprando
+      </a>
+    </div>
   </div>
 </div>
 
 <ng-template #noItems>
-  <p class="carrito-vacio">No hay productos en el carrito.</p>
+  <div class="carrito-vacio-container">
+    <div class="carrito-vacio">
+      <i class="fas fa-shopping-cart"></i>
+      <h3>Tu carrito está vacío</h3>
+      <p>Agrega productos para comenzar</p>
+      <a routerLink="/productos" class="btn-comenzar">Comenzar a Comprar</a>
+    </div>
+  </div>
 </ng-template>
-

@@ -3,35 +3,79 @@
 
   <nav class="nav-links">
     <a routerLink="/" *ngIf="!isLoggedIn()">Inicio</a>
-    <a routerLink="/login" *ngIf="!isLoggedIn()">Iniciar sesión</a>
-    <a routerLink="/register" *ngIf="!isLoggedIn()">Registrarse</a>
-    <a (click)="logout()" *ngIf="isLoggedIn()">Cerrar sesión</a>
-  </nav>
-
-  <div class="carrito-container" (mouseenter)="mostrarResumenCarritoHandler()" (mouseleave)="ocultarResumenCarritoHandler()">
-    <a routerLink="/carrito" class="carrito-icono">
-      🛒 <span *ngIf="totalCantidad > 0" class="carrito-contador">{{ totalCantidad }}</span>
-    </a>
-
-    <div class="carrito-resumen" *ngIf="mostrarResumen && totalCantidad > 0">
-      <h3>Tu Carrito</h3>
-      <ul>
-        <li *ngFor="let item of items">
-          <img [src]="item.imagen" alt="{{ item.nombre }}" class="item-imagen" />
-          <div class="item-info">
-            <div class="item-nombre">{{ item.nombre }}</div>
-            <div class="item-detalles">
-              {{ item.cantidad }} x ${{ item.precio }} CLP<br />
-              <span class="precio-usd">USD {{ (item.precio / tipoCambio).toFixed(2) }}</span>
-            </div>
+    
+    <!-- Menú de cuenta -->
+    <div class="account-menu-container" 
+         (mouseenter)="mostrarMenuCuentaHandler()" 
+         (mouseleave)="ocultarMenuCuentaHandler()">
+      <button class="account-icon">
+        <i class="fas fa-user-circle"></i>
+        <span *ngIf="!isLoggedIn()">Cuenta</span>
+      </button>
+      
+      <div class="account-menu" *ngIf="mostrarMenuCuenta">
+        <a routerLink="/login" *ngIf="!isLoggedIn()">Iniciar sesión</a>
+        <a routerLink="/register" *ngIf="!isLoggedIn()">Registrarse</a>
+        
+        <div *ngIf="isLoggedIn()" class="logged-in-menu">
+          <div class="user-info">
+            <h4>{{userName}}</h4>
+            <p>{{userEmail}}</p>
           </div>
-        </li>
-      </ul>
-      <div class="total">
-        Total: ${{ total }} CLP<br />
-        <span class="total-usd">USD {{ (total / tipoCambio).toFixed(2) }}</span>
+          <a routerLink="/perfil">Ver cuenta</a>
+          <a (click)="logout()">Cerrar sesión</a>
+        </div>
       </div>
-      <button (click)="irAlCarrito()">Ir al carrito</button>
     </div>
-  </div>
+
+    <!-- Carrito mejorado -->
+    <div class="carrito-container" [class.active]="carritoFijo">
+      <button class="carrito-btn" 
+              (click)="toggleCarritoFijo()"
+              (mouseenter)="mostrarResumenCarritoHandler()">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Carrito</span>
+        <span *ngIf="totalCantidad > 0" class="carrito-contador">{{ totalCantidad }}</span>
+      </button>
+
+      <div class="carrito-resumen" *ngIf="mostrarResumen || carritoFijo">
+        <div class="carrito-header">
+          <h3>Tu Carrito</h3>
+          <button class="close-carrito" (click)="toggleCarritoFijo()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="carrito-content">
+          <ul *ngIf="totalCantidad > 0; else emptyCart">
+            <li *ngFor="let item of items">
+              <img [src]="item.imagen || 'assets/default-product.png'" alt="{{ item.nombre }}" class="item-imagen" />
+              <div class="item-info">
+                <div class="item-nombre">{{ item.nombre }}</div>
+                <div class="item-detalles">
+                  {{ item.cantidad }} x ${{ item.precio | number }} CLP
+                  <span class="precio-usd">(USD {{ (item.precio / tipoCambio).toFixed(2) }})</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+          
+          <ng-template #emptyCart>
+            <div class="empty-cart">
+              <i class="fas fa-shopping-cart"></i>
+              <p>Tu carrito está vacío</p>
+            </div>
+          </ng-template>
+        </div>
+        
+        <div class="carrito-footer" *ngIf="totalCantidad > 0">
+          <div class="total">
+            Total: ${{ total | number }} CLP
+            <span class="total-usd">(USD {{ (total / tipoCambio).toFixed(2) }})</span>
+          </div>
+          <button class="btn-ir-carrito" (click)="irAlCarrito()">Ir al carrito</button>
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>

@@ -45,4 +45,13 @@ export class CarritoService {
   obtenerTotalPrecio(): number {
     return this.carritoItems.reduce((sum: number, item: ItemCarrito) => sum + (item.precio * item.cantidad), 0);
   }
+
+  actualizarCantidad(id: number, cantidad: number): void {
+    const item = this.carritoItems.find(i => i.id === id);
+    
+    if (item) {
+      item.cantidad = cantidad;
+      this.actualizarCarrito();
+    }
+  }
 }
