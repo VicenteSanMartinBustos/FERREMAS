@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 
+
 export const routes: Routes = [
   { path: '', component: ProductoVistaPublicaComponent },
   { path: 'productos', component: ProductoListComponent, canActivate: [AuthGuard] },

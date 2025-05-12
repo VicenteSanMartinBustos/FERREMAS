@@ -174,11 +174,12 @@
   font-size: 1rem;
   padding: 0.5rem;
   transition: all 0.2s ease;
+  color: #f40018;
 }
 
 .btn-eliminar:hover {
-  color: #a71d2a;
-  transform: scale(1.1);
+  color: #ff0019;
+  transform: scale(1.3);
 }
 
 /* Resumen del carrito */
@@ -209,7 +210,7 @@
 .btn-pago {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #05ef5f 0%, #83e483 100%);
+  background: rgb(0, 255, 0);
   color: black;
   border: none;
   border-radius: 8px;
@@ -222,6 +223,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
+}
+
+.btn-pago:hover {
+  background: rgb(0, 255, 0);
+  transform: translateY(-2px);
 }
 
 

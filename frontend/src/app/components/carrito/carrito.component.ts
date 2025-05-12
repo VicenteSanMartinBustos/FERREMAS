@@ -62,7 +62,7 @@ export class CarritoComponent implements OnInit {
 
   procederAlPago() {
     if (this.items.length > 0) {
-      this.router.navigate(['/checkout']);
+      this.router.navigate(['/pago']);
     }
   }
 }

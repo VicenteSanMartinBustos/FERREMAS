@@ -170,8 +170,8 @@
 }
 
 .carrito-contador {
-  background: #ff6be4;
-  color: white;
+  background: #ffffff;
+  color: rgb(0, 0, 0);
   border-radius: 50%;
   width: 22px;
   height: 22px;
@@ -282,7 +282,7 @@
 .btn-ir-carrito {
   width: 100%;
   padding: 0.8rem;
-  background: #ff6be4;
+  background: #000000;
   color: white;
   border: none;
   border-radius: 4px;
@@ -290,10 +290,7 @@
   font-weight: 500;
   transition: all 0.3s ease;
 }
-
-.btn-ir-carrito:hover {
-  background: #ff4fd7;
-}
+  
 
 .item-imagen {
   width: 50px;

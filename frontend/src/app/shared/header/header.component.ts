@@ -22,8 +22,8 @@ export class HeaderComponent implements OnInit {
   mostrarMenuCuenta = false;
   carritoFijo = false;
   tipoCambio = 1;
-  userName = 'Usuario Ejemplo';
-  userEmail = 'usuario@example.com';
+  userName = '';
+  userEmail = '';
   
   // Iconos
   faUserCircle = faUserCircle;
@@ -51,8 +51,8 @@ export class HeaderComponent implements OnInit {
     if (this.isLoggedIn()) {
       // Aquí deberías obtener los datos reales del usuario
       const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-      this.userName = userData.name || 'Usuario';
-      this.userEmail = userData.email || 'usuario@example.com';
+      this.userName = userData.name ;
+      this.userEmail = userData.email ;
     }
   }
 

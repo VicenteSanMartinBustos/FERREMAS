@@ -2,7 +2,7 @@
   <button (click)="irAlInicio()" class="logo">FERREMAS</button>
 
   <nav class="nav-links">
-    <a routerLink="/" *ngIf="!isLoggedIn()">Inicio</a>
+    <a routerLink="/">Inicio</a>
     
     <!-- Menú de cuenta -->
     <div class="account-menu-container" 
@@ -30,7 +30,7 @@
 
     <!-- Carrito mejorado -->
     <div class="carrito-container" [class.active]="carritoFijo">
-      <button class="carrito-btn" 
+      <button [routerLink]="['/carrito']" class="carrito-btn" 
               (click)="toggleCarritoFijo()"
               (mouseenter)="mostrarResumenCarritoHandler()">
         <i class="fas fa-shopping-cart"></i>

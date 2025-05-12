@@ -11,7 +11,7 @@ interface LoginResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api/usuarios';
+  private apiUrl = 'http://localhost:8000/api/usuarios/';  // SI NO FUNCIONA CAMBIAR A localhost:8000/api/usuarios/  -- 11/05/2025 , 20:32
 
   constructor(private http: HttpClient, private router: Router) {}
 

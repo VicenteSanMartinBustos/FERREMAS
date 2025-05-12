@@ -9,35 +9,23 @@
   background: 
     linear-gradient(135deg, 
       #000000 0%, 
-      #1a0a14 40%, 
-      #2d0b1f 100%);
-  color: #ffb6e6;
+      rgb(0, 0, 0) 40%, 
+      #000000 100%);
+  color: #0e0d0d;
   padding: 3.5rem 2rem;
   text-align: center;
   margin-bottom: 3rem;
   border-radius: 8px;
-  border: 1px solid #ff9ee0;
+  border: 1px solid #f2ff01;
   box-shadow: 
-    0 0 10px rgba(255, 158, 224, 0.4),
-    0 0 20px rgba(255, 158, 224, 0.2),
-    inset 0 0 10px rgba(255, 158, 224, 0.3);
+    0 0 10px rgba(239, 239, 239, 0.865),
+    0 0 20px rgba(230, 230, 230, 0.2),
+    inset 0 0 10px rgba(147, 145, 146, 0.3);
   position: relative;
   overflow: hidden;
 }
 
-.banner-bienvenida::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: 
-    radial-gradient(circle, 
-      rgba(255, 182, 230, 0.1) 0%, 
-      transparent 70%);
-  animation: rotateGlow 15s linear infinite;
-}
+
 
 .banner-bienvenida h1 {
   font-size: 3rem;
@@ -58,7 +46,10 @@
   max-width: 800px;
   margin: 0 auto;
   color: #ffe6f7; /* Rosa pastel más claro */
-  text-shadow: 0 0 8px rgba(255, 182, 230, 0.6);
+  text-shadow: 
+    0 0 5px #ffb6e6,
+    0 0 15px #ff8ed6,
+    0 0 25px #ff66c4;
   line-height: 1.6;
   position: relative;
 }
@@ -93,7 +84,6 @@
   right: 20px;
   opacity: 0.1;
   font-size: 2rem;
-  filter: drop-shadow(0 0 5px #ff8ed6);
 }
 
 /* Encabezado de Productos Estilo FERREMAS */
