@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ItemCarrito } from '../carrito.interface';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +12,13 @@ export class CarritoService {
   private carritoSubject = new BehaviorSubject<ItemCarrito[]>([]);
   public carrito$ = this.carritoSubject.asObservable();
 
-  constructor() {
-    this.cargarDesdeStorage();
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.cargarDesdeStorage();
+    }
   }
+  
+  
 
   agregar(item: ItemCarrito): void {
     const itemExistente = this.carritoItems.find(i => i.id === item.id);
@@ -73,8 +79,15 @@ export class CarritoService {
   private cargarDesdeStorage(): void {
     const data = localStorage.getItem('carrito');
     if (data) {
-      this.carritoItems = JSON.parse(data);
-      this.actualizarCarrito();
+      try {
+        this.carritoItems = JSON.parse(data);
+        this.actualizarCarrito();
+      } catch (error) {
+        console.error(' Error al cargar carrito desde localStorage:', error);
+        localStorage.removeItem('carrito');
+      }
     }
   }
+  
+  
 }
