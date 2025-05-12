@@ -93,17 +93,19 @@ export class ProductoVistaPublicaComponent implements OnInit {
 
   agregarAlCarrito(producto: Producto): void {
     const cantidad = this.cantidades[producto.id] || 1;
-
-    if (producto.stock <= 0) {
+    const cantidadEnCarrito = this.getCantidadEnCarrito(producto.id);
+    const stockDisponible = producto.stock - cantidadEnCarrito;
+  
+    if (stockDisponible <= 0) {
       alert('Este producto está agotado');
       return;
     }
-
-    if (cantidad > producto.stock) {
-      alert(`Solo quedan ${producto.stock} unidades disponibles`);
+  
+    if (cantidad > stockDisponible) {
+      alert(`Solo puedes agregar ${stockDisponible} unidades. Ya tienes ${cantidadEnCarrito} en el carrito.`);
       return;
     }
-
+  
     const item: ItemCarrito = {
       id: producto.id,
       nombre: producto.nombre,
@@ -112,13 +114,13 @@ export class ProductoVistaPublicaComponent implements OnInit {
       imagen: producto.imagen ?? undefined,
       stockDisponible: producto.stock
     };
-
+  
     this.carritoService.agregar(item);
-    producto.stock -= cantidad;
     this.cantidades[producto.id] = 1;
-    
+  
     // Se eliminó el alert() que mostraba el mensaje de confirmación
   }
+  
 
   validarCantidad(producto: Producto): void {
     if (!this.cantidades[producto.id] || this.cantidades[producto.id] < 1) {
@@ -151,5 +153,10 @@ export class ProductoVistaPublicaComponent implements OnInit {
     if (!this.tipoCambio) return '-';
     const precioUsd = precioClp / this.tipoCambio;
     return '$' + precioUsd.toFixed(2);
+  }
+
+  getCantidadEnCarrito(id: number): number {
+    const item = this.carritoService.getItem(id);
+    return item ? item.cantidad : 0;
   }
 }

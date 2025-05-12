@@ -71,13 +71,22 @@
         </div>
 
         <!-- Stock -->
-        <div class="card-stock" [class.agotado]="p.stock === 0">
-          <i class="fas fa-box-open"></i>
-          <span *ngIf="p.stock > 5">Disponible ({{p.stock}} unidades)</span>
-          <span *ngIf="p.stock <= 5 && p.stock > 0">Últimas unidades</span>
-          <span *ngIf="p.stock === 0">Agotado</span>
-        </div>
 
+        <div class="card-stock" [class.agotado]="p.stock - getCantidadEnCarrito(p.id) === 0">
+          <i class="fas fa-box-open"></i>
+
+          <span *ngIf="(p.stock - getCantidadEnCarrito(p.id)) > 5">
+            Disponible ({{ p.stock - getCantidadEnCarrito(p.id) }} unidades)
+          </span>
+
+          <span *ngIf="(p.stock - getCantidadEnCarrito(p.id)) <= 5 && (p.stock - getCantidadEnCarrito(p.id)) > 0">
+            Últimas {{ p.stock - getCantidadEnCarrito(p.id) }} unidades
+          </span>
+
+          <span *ngIf="(p.stock - getCantidadEnCarrito(p.id)) === 0">
+            Agotado
+          </span>
+        </div>
         <!-- Selector de cantidad y botón -->
         <div class="card-acciones">
           <div class="cantidad-selector" *ngIf="p.stock > 0">

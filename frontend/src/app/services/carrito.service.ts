@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ItemCarrito } from '../carrito.interface';
 
 @Injectable({
@@ -10,47 +10,70 @@ export class CarritoService {
   private carritoSubject = new BehaviorSubject<ItemCarrito[]>([]);
   public carrito$ = this.carritoSubject.asObservable();
 
-  constructor() {}
+  constructor() {
+    this.cargarDesdeStorage();
+  }
 
   agregar(item: ItemCarrito): void {
     const itemExistente = this.carritoItems.find(i => i.id === item.id);
-    
+
     if (itemExistente) {
       itemExistente.cantidad += item.cantidad;
     } else {
-      this.carritoItems.push({...item});
+      this.carritoItems.push({ ...item });
     }
-    
+
     this.actualizarCarrito();
+    this.guardarEnStorage();
   }
 
   eliminar(id: number): void {
     this.carritoItems = this.carritoItems.filter(item => item.id !== id);
     this.actualizarCarrito();
+    this.guardarEnStorage();
   }
 
   vaciarCarrito(): void {
     this.carritoItems = [];
     this.actualizarCarrito();
+    this.guardarEnStorage();
+  }
+
+  actualizarCantidad(id: number, cantidad: number): void {
+    const item = this.carritoItems.find(i => i.id === id);
+
+    if (item) {
+      item.cantidad = cantidad;
+      this.actualizarCarrito();
+      this.guardarEnStorage();
+    }
+  }
+
+  obtenerTotalItems(): number {
+    return this.carritoItems.reduce((sum, item) => sum + item.cantidad, 0);
+  }
+
+  obtenerTotalPrecio(): number {
+    return this.carritoItems.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+  }
+
+  getItem(id: number): ItemCarrito | undefined {
+    return this.carritoItems.find(item => item.id === id);
   }
 
   private actualizarCarrito(): void {
     this.carritoSubject.next([...this.carritoItems]);
   }
 
-  obtenerTotalItems(): number {
-    return this.carritoItems.reduce((sum: number, item: ItemCarrito) => sum + item.cantidad, 0);
+  // 🔐 Almacenamiento en localStorage
+  private guardarEnStorage(): void {
+    localStorage.setItem('carrito', JSON.stringify(this.carritoItems));
   }
 
-  obtenerTotalPrecio(): number {
-    return this.carritoItems.reduce((sum: number, item: ItemCarrito) => sum + (item.precio * item.cantidad), 0);
-  }
-
-  actualizarCantidad(id: number, cantidad: number): void {
-    const item = this.carritoItems.find(i => i.id === id);
-    
-    if (item) {
-      item.cantidad = cantidad;
+  private cargarDesdeStorage(): void {
+    const data = localStorage.getItem('carrito');
+    if (data) {
+      this.carritoItems = JSON.parse(data);
       this.actualizarCarrito();
     }
   }
