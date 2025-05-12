@@ -1,0 +1,15 @@
+<div class="perfil-container">
+  <div *ngIf="cargando">Cargando datos del perfil...</div>
+
+  <div *ngIf="error" class="perfil-error">
+     Error al cargar los datos del perfil.
+  </div>
+
+  <div *ngIf="perfil && !cargando" class="perfil-datos">
+    <h2> Mi Cuenta</h2>
+    <p><strong>ID:</strong> {{ perfil.id }}</p>
+    <p><strong>Nombre de usuario:</strong> {{ perfil.username }}</p>
+    <p><strong>Email:</strong> {{ perfil.email }}</p>
+    <!-- Agrega más campos si los tienes en el backend -->
+  </div>
+</div>

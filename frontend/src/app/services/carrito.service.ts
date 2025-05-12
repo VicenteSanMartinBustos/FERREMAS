@@ -71,7 +71,7 @@ export class CarritoService {
     this.carritoSubject.next([...this.carritoItems]);
   }
 
-  // 🔐 Almacenamiento en localStorage
+  //Almacenamiento en localStorage
   private guardarEnStorage(): void {
     localStorage.setItem('carrito', JSON.stringify(this.carritoItems));
   }

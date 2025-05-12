@@ -6,6 +6,7 @@ import { ProductoVistaPublicaComponent } from './components/producto-vista-publi
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 export const routes: Routes = [
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'productos/editar/:id', component: ProductoFormComponent, canActivate: [AuthGuard] },
   { path: 'carrito', component: CarritoComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'perfil', component: PerfilComponent }, 
 ];

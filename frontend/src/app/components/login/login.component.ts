@@ -66,7 +66,8 @@ export class LoginComponent {
       })
       .subscribe({
         next: (res: any) => {
-          localStorage.setItem('token', res.token);
+          localStorage.setItem('access_token', res.access);
+          localStorage.setItem('refresh_token', res.refresh);
           if (this.rememberMe) {
             localStorage.setItem('rememberMe', 'true');
           }

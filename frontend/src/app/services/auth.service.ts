@@ -38,4 +38,20 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem('access_token');
   }
+
+  obtenerPerfil(): Observable<any> {
+    const token = localStorage.getItem('access_token');
+  
+    if (!token) {
+      console.warn('Token no encontrado');
+      return new Observable();  // Evita seguir si no hay token
+    }
+  
+    return this.http.get('http://localhost:8000/api/usuarios/perfil/', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+ 
 } 
