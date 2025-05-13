@@ -1,95 +1,80 @@
-/* ============== ESTILOS GENERALES ============== */
+/* ===== ESTILOS GENERALES ===== */
 .container {
   max-width: 1500px;
   margin: 0 auto;
   padding: 0 1rem;
+  color: #e0e0e0;
 }
-/* Banner FERREMAS - Estilo Neón Rosa Pastel */
+
+/* ===== BANNER DE BIENVENIDA ===== */
 .banner-bienvenida {
-  background: 
-    linear-gradient(135deg, 
-      #000000 0%, 
-      rgb(0, 0, 0) 40%, 
-      #000000 100%);
-  color: #0e0d0d;
+  background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+  color: #ffffff;
   padding: 3.5rem 2rem;
   text-align: center;
   margin-bottom: 3rem;
-  border-radius: 8px;
-  border: 1px solid #f2ff01;
-  box-shadow: 
-    0 0 10px rgba(239, 239, 239, 0.865),
-    0 0 20px rgba(230, 230, 230, 0.2),
-    inset 0 0 10px rgba(147, 145, 146, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(100, 181, 246, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
 }
 
+.banner-bienvenida::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, 
+    rgba(100, 181, 246, 0.1) 0%, 
+    transparent 70%);
+  animation: rotate 20s linear infinite;
+  z-index: 0;
+}
 
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
 .banner-bienvenida h1 {
   font-size: 3rem;
   margin-bottom: 1.2rem;
-  color: #ffd6f7; /* Rosa pastel */
-  text-shadow: 
-    0 0 5px #ffb6e6,
-    0 0 15px #ff8ed6,
-    0 0 25px #ff66c4;
-  font-weight: 700;
-  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+  font-weight: 600;
+  letter-spacing: 1px;
   position: relative;
-  animation: textPulse 2s ease-in-out infinite alternate;
+  z-index: 1;
 }
 
 .banner-subtitle {
   font-size: 1.3rem;
   max-width: 800px;
   margin: 0 auto;
-  color: #ffe6f7; /* Rosa pastel más claro */
-  text-shadow: 
-    0 0 5px #ffb6e6,
-    0 0 15px #ff8ed6,
-    0 0 25px #ff66c4;
+  color: #bbbbbb;
   line-height: 1.6;
   position: relative;
+  z-index: 1;
 }
 
-/* Efecto de divisor neón */
 .banner-subtitle::after {
   content: '';
   display: block;
   width: 150px;
   height: 2px;
-  background: #ff9ee0;
+  background: linear-gradient(90deg, 
+    rgba(100, 181, 246, 0.5) 0%, 
+    rgba(100, 181, 246, 0) 100%);
   margin: 1.5rem auto;
-  box-shadow: 0 0 10px #ff66c4;
 }
 
-/* Tipografía */
-.banner-bienvenida h1 {
-  font-family: 'Kanit', sans-serif;
-  text-transform: uppercase;
-}
-
-.banner-subtitle {
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 300;
-}
-
-/* Efecto de herramientas neón (opcional) */
-.banner-bienvenida::after {
-  content: '⚙️🔧';
-  position: absolute;
-  bottom: 15px;
-  right: 20px;
-  opacity: 0.1;
-  font-size: 2rem;
-}
-
-/* Encabezado de Productos Estilo FERREMAS */
+/* ===== ENCABEZADO DE PRODUCTOS ===== */
 .encabezado-productos {
   text-align: center;
-  margin: 4rem 0 3rem;
+  margin: 3rem 0;
   padding: 0 1.5rem;
   position: relative;
 }
@@ -97,15 +82,25 @@
 .titulo-productos {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 1px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
-  position: relative;
 }
 
 .titulo-icono {
+  color: #64b5f6;
   font-size: 1.8rem;
-  animation: iconPulse 2s ease-in-out infinite alternate;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .subtitulo-productos {
@@ -113,57 +108,31 @@
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
-  position: relative;
+  color: #bbbbbb;
 }
 
-/* Efecto divisor decorativo */
 .encabezado-productos::after {
   content: '';
   display: block;
   width: 120px;
   height: 3px;
   margin: 2rem auto;
-  box-shadow: 0 0 10px #0a0a0a;
-  opacity: 0.7;
+  background: linear-gradient(90deg, 
+    rgba(100, 181, 246, 0.5) 0%, 
+    rgba(100, 181, 246, 0) 100%);
 }
 
-
-
-/* Tipografía */
-.titulo-productos {
-  font-family: 'Kanit', sans-serif;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-.subtitulo-productos {
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 300;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .titulo-productos {
-    font-size: 2rem;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .subtitulo-productos {
-    font-size: 1.1rem;
-    padding: 0 1rem;
-  }
-}
-
-/* ============== ESTILOS DEL TIPO DE CAMBIO ============== */
+/* ===== TIPO DE CAMBIO ===== */
 .tipo-cambio-container {
-  background: #f8f9fa;
-  padding: 0.8rem;
+  background: rgba(30, 30, 30, 0.7);
+  padding: 0.8rem 1.5rem;
   border-radius: 8px;
-  margin: 1rem auto;
+  margin: 2rem auto;
   max-width: 300px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .loading-indicator,
@@ -172,94 +141,119 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
   font-size: 0.95rem;
 }
 
 .loading-indicator {
-  color: #3498db;
+  color: #64b5f6;
 }
 
 .error-message {
-  color: #e74c3c;
+  color: #ff6b6b;
 }
 
 .tipo-cambio-info {
-  color: #2c3e50;
+  color: #ffffff;
   font-weight: 500;
 }
 
-/* ============== ESTILOS DE CARGA Y ERROR ============== */
+.tipo-cambio-info i {
+  color: #81c784;
+}
+
+/* ===== ESTADOS DE CARGA Y ERROR ===== */
 .loading-products,
 .error-products {
   text-align: center;
   padding: 2rem;
   margin: 2rem 0;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 .loading-products {
-  background: #f8f9fa;
-  color: #3498db;
+  color: #64b5f6;
 }
 
 .error-products {
-  background: #fdecea;
-  color: #e74c3c;
+  color: #ff6b6b;
+}
+
+.loading-products i,
+.error-products i {
+  font-size: 1.3rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .banner-bienvenida h1 {
+    font-size: 2.2rem;
+  }
+  
+  .banner-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .titulo-productos {
+    font-size: 2rem;
+  }
+  
+  .subtitulo-productos {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-bienvenida {
+    padding: 2rem 1rem;
+  }
+  
+  .banner-bienvenida h1 {
+    font-size: 1.8rem;
+  }
+  
+  .titulo-productos {
+    font-size: 1.6rem;
+  }
+  
+  .tipo-cambio-container {
+    max-width: 100%;
+  }
 }
 
 /* ============== ESTILOS DEL GRID DE PRODUCTOS ============== */
 .grid-productos {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
   gap: 1.5rem;
   padding: 1rem 0;
   margin: 2rem 0;
 }
 
-@media (max-width: 1200px) {
-  .grid-productos {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .grid-productos {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .grid-productos {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .grid-productos {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ============== ESTILOS DE LAS CARD DE PRODUCTOS ============== */
 .card-producto {
   position: relative;
-  background: white;
+  background: linear-gradient(145deg, #1e1e1e 0%, #252525 100%);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
-  border: 1px solid #eee;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
 }
 
 .card-producto:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  border-color: rgba(100, 181, 246, 0.3);
 }
 
 /* Badges */
@@ -267,7 +261,7 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #e74c3c;
+  background: linear-gradient(135deg, #ff6b6b 0%, #d32f2f 100%);
   color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
@@ -277,7 +271,7 @@
   gap: 0.3rem;
   z-index: 2;
   font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
 }
 
 .card-badge i {
@@ -285,7 +279,7 @@
 }
 
 .stock-bajo {
-  background: #f39c12;
+  background: linear-gradient(135deg, #ffb74d 0%, #f57c00 100%);
 }
 
 /* Imagen del producto */
@@ -294,7 +288,7 @@
   width: 100%;
   height: 200px;
   overflow: hidden;
-  background: #f5f5f5;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .card-imagen {
@@ -302,10 +296,12 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  opacity: 0.9;
 }
 
 .card-producto:hover .card-imagen {
   transform: scale(1.05);
+  opacity: 1;
 }
 
 .card-imagen-placeholder {
@@ -314,8 +310,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #bdc3c7;
+  color: rgba(255, 255, 255, 0.2);
   font-size: 3rem;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* Contenido de la card */
@@ -326,8 +323,8 @@
 .card-titulo {
   margin: 0.5rem 0;
   font-size: 1.2rem;
-  color: #2c3e50;
-  font-weight: 600;
+  color: #ffffff;
+  font-weight: 500;
   min-height: 3rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -344,7 +341,7 @@
 }
 
 .precio-actual {
-  color: #2c3e50;
+  color: #ffffff;
   font-weight: bold;
   font-size: 1.3rem;
   display: flex;
@@ -353,20 +350,20 @@
 }
 
 .precio-actual i {
-  color: #3498db;
+  color: #64b5f6;
   font-size: 1rem;
 }
 
 .precio-usd {
   font-size: 0.95rem;
-  color: #7f8c8d;
+  color: #bbbbbb;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .precio-usd i {
-  color: #27ae60;
+  color: #81c784;
 }
 
 /* Stock */
@@ -377,20 +374,20 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0;
-  border-top: 1px dashed #eee;
-  border-bottom: 1px dashed #eee;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
 .card-stock i {
-  color: #7f8c8d;
+  color: #bbbbbb;
 }
 
 .card-stock.agotado {
-  color: #e74c3c;
+  color: #ff6b6b;
 }
 
 .card-stock.agotado i {
-  color: #e74c3c;
+  color: #ff6b6b;
 }
 
 /* Acciones */
@@ -402,32 +399,33 @@
 
 .cantidad-selector {
   display: flex;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   overflow: hidden;
   height: 40px;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .cantidad-btn {
   border: none;
-  background: #f8f9fa;
+  background: rgba(255, 255, 255, 0.05);
   width: 35px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2c3e50;
+  color: #ffffff;
   transition: all 0.2s;
 }
 
 .cantidad-btn:hover {
-  background: #e9ecef;
-  color: #3498db;
+  background: rgba(255, 255, 255, 0.1);
+  color: #64b5f6;
 }
 
 .cantidad-btn:disabled {
-  background: #f8f9fa;
-  color: #000000;
+  background: rgba(255, 255, 255, 0.05);
+  color: #666;
   cursor: not-allowed;
 }
 
@@ -435,9 +433,11 @@
   width: 45px;
   text-align: center;
   border: none;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
   -moz-appearance: textfield;
 }
 
@@ -448,63 +448,55 @@
 }
 
 /* ============== ESTILOS DEL BOTÓN ============== */
-.card-acciones {
-  margin-top: auto;
-  padding-top: 0.5rem;
-}
-
 .card-btn {
-  background: #3498db;
+  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
   color: white;
   border: none;
   border-radius: 6px;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.card-btn i {
-  flex-shrink: 0;
-}
-
-.card-btn {
-  background: #3498db;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  width: 100%;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 2px 10px rgba(33, 150, 243, 0.3);
+}
+
+.card-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
 }
 
 .card-btn:disabled {
-  background: #95a5a6;
-  color: white;
+  background: #333;
+  color: #666;
   cursor: not-allowed;
-  position: relative;
-}
-
-.card-btn:disabled i {
-  display: none;
+  box-shadow: none;
+  transform: none;
 }
 
 .card-btn:disabled::before {
   content: "✖";
   margin-right: 0.3rem;
   font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid-productos {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .card-imagen-container {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-productos {
+    grid-template-columns: 1fr;
+  }
 }

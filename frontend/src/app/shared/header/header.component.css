@@ -1,24 +1,25 @@
-/* Estilos generales del navbar */
+/* === HEADER GENERAL === */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(18, 18, 18, 0.95);
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: white;
   padding: 1rem 5%;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(100, 181, 246, 0.15);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* === LOGO === */
 .logo {
   font-size: 2rem;
   font-weight: 800;
-  color: #fffefe;
+  color: #fff;
   background: none;
   border: none;
   cursor: pointer;
@@ -28,15 +29,14 @@
 }
 
 .logo:hover {
-  font-size: 2rem;
-  font-weight: 800;
   color: transparent;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  background: linear-gradient(135deg, #64b5f6 0%, #2196F3 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  text-shadow: 0 2px 10px rgba(255, 154, 158, 0.2);
+  text-shadow: 0 2px 12px rgba(100, 181, 246, 0.35);
 }
 
+/* === NAV LINKS === */
 .nav-links {
   display: flex;
   gap: 2rem;
@@ -49,13 +49,29 @@
   font-weight: 500;
   font-size: 1.1rem;
   transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links > a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #64b5f6;
+  transition: width 0.3s ease;
+}
+
+.nav-links > a:hover::after {
+  width: 100%;
 }
 
 .nav-links > a:hover {
-  color: #ffffff;
+  color: #fff;
 }
 
-/* Estilos del menú de cuenta */
+/* === CUENTA === */
 .account-menu-container {
   position: relative;
 }
@@ -70,7 +86,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  border-radius: 50px;
+  border-radius: 40px;
   transition: all 0.3s ease;
 }
 
@@ -79,18 +95,20 @@
 }
 
 .account-icon:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: rgba(100, 181, 246, 0.1);
+  color: #64b5f6;
 }
 
 .account-menu {
   position: absolute;
-  top: 100%;
+  top: 110%;
   right: 0;
-  background: #ffffff;
-  min-width: 200px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
+  background: rgba(40, 40, 40, 0.98);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(100, 181, 246, 0.15);
+  min-width: 220px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
   padding: 1rem 0;
   z-index: 1000;
   opacity: 0;
@@ -108,14 +126,14 @@
 .account-menu a {
   display: block;
   padding: 0.7rem 1.5rem;
-  color: #333;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .account-menu a:hover {
-  background: #f5f5f5;
-  color: #000;
+  background: rgba(100, 181, 246, 0.1);
+  color: #64b5f6;
 }
 
 .logged-in-menu {
@@ -125,22 +143,23 @@
 
 .user-info {
   padding: 0.7rem 1.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(100, 181, 246, 0.1);
   margin-bottom: 0.5rem;
+  color: #bbb;
 }
 
 .user-info h4 {
   margin: 0 0 0.3rem 0;
-  color: #222;
+  color: #fff;
 }
 
 .user-info p {
   margin: 0;
   font-size: 0.8rem;
-  color: #666;
+  color: #999;
 }
 
-/* Estilos del carrito mejorado */
+/* === CARRITO === */
 .carrito-container {
   position: relative;
 }
@@ -155,44 +174,43 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  border-radius: 50px;
+  border-radius: 40px;
   transition: all 0.3s ease;
   position: relative;
 }
 
 .carrito-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-}
-
-.carrito-btn i {
-  font-size: 1.4rem;
+  background: rgba(100, 181, 246, 0.1);
+  color: #64b5f6;
 }
 
 .carrito-contador {
-  background: #ffffff;
-  color: rgb(0, 0, 0);
+  background: #64b5f6;
+  color: #fff;
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
   font-weight: bold;
   position: absolute;
-  top: -5px;
-  right: -5px;
+  top: -6px;
+  right: -6px;
 }
 
+/* RESUMEN DEL CARRITO */
 .carrito-resumen {
   position: absolute;
-  top: 100%;
+  top: 110%;
   right: 0;
-  background: #ffffff;
+  background: rgba(40, 40, 40, 0.98);
+  border: 1px solid rgba(100, 181, 246, 0.15);
+  backdrop-filter: blur(10px);
   width: 350px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
@@ -215,13 +233,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid #eee;
-}
-
-.carrito-header h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #333;
+  border-bottom: 1px solid rgba(100, 181, 246, 0.1);
+  color: #fff;
 }
 
 .close-carrito {
@@ -234,7 +247,7 @@
 }
 
 .close-carrito:hover {
-  color: #333;
+  color: #64b5f6;
 }
 
 .carrito-content {
@@ -247,57 +260,72 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding: 2rem 0;
-  color: #999;
+  color: #777;
 }
 
 .empty-cart i {
   font-size: 2rem;
   margin-bottom: 1rem;
-}
-
-.empty-cart p {
-  margin: 0;
+  color: #64b5f6;
 }
 
 .carrito-footer {
   padding: 1rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(100, 181, 246, 0.1);
+  color: #fff;
 }
 
 .total {
   font-weight: bold;
   margin-bottom: 1rem;
   text-align: right;
-  color: #333;
 }
 
 .total-usd {
   font-size: 0.85rem;
-  color: #999;
+  color: #bbb;
   font-weight: normal;
 }
 
 .btn-ir-carrito {
   width: 100%;
   padding: 0.8rem;
-  background: #000000;
-  color: white;
+  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
-  
+
+.btn-ir-carrito:hover {
+  background: linear-gradient(135deg, #1976D2 0%, #2196F3 100%);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+/* === ITEMS === */
+.carrito-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.carrito-item:hover {
+  background: rgba(100, 181, 246, 0.05);
+}
 
 .item-imagen {
   width: 50px;
   height: 50px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
   margin-right: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .item-info {
@@ -306,13 +334,13 @@
 
 .item-nombre {
   font-weight: 500;
-  color: #333;
+  color: #fff;
   margin-bottom: 0.3rem;
 }
 
 .item-detalles {
   font-size: 0.9rem;
-  color: #666;
+  color: #bbb;
 }
 
 .precio-usd {
@@ -320,23 +348,38 @@
   color: #999;
 }
 
-/* Responsive */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
-  
+
   .nav-links {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
     gap: 1rem;
   }
-  
+
   .account-icon span,
   .carrito-btn span {
     display: none;
   }
-  
+
   .carrito-resumen {
-    width: 300px;
-    right: -50px;
+    width: 95vw;
+    right: 0;
+    left: 0;
+    border-radius: 0;
+  }
+
+  .account-menu {
+    width: 95vw;
+    right: 0;
+    left: 0;
+    border-radius: 0;
   }
 }
