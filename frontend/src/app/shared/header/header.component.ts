@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUserCircle, faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -24,13 +25,17 @@ export class HeaderComponent implements OnInit {
   tipoCambio = 1;
   userName = '';
   userEmail = '';
-  
+
   // Iconos
   faUserCircle = faUserCircle;
   faShoppingCart = faShoppingCart;
   faTimes = faTimes;
 
-  constructor(private carritoService: CarritoService, private router: Router) {}
+  constructor(
+    private carritoService: CarritoService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.carritoService.carrito$.subscribe(data => {
@@ -39,7 +44,6 @@ export class HeaderComponent implements OnInit {
       this.total = data.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
     });
 
-    // Obtener tipo de cambio
     fetch('http://localhost:8000/api/dolar/')
       .then(res => res.json())
       .then(data => {
@@ -47,13 +51,19 @@ export class HeaderComponent implements OnInit {
       })
       .catch(err => console.error('Error al obtener tipo de cambio:', err));
 
-    // Obtener información del usuario si está logueado
-    if (this.isLoggedIn()) {
-      // Aquí deberías obtener los datos reales del usuario
-      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-      this.userName = userData.name ;
-      this.userEmail = userData.email ;
-    }
+    this.userService.user$.subscribe(user => {
+      if (user) {
+        this.userName = user.name;
+        this.userEmail = user.email;
+      } else {
+        this.userName = '';
+        this.userEmail = '';
+      }
+    });
+  }
+
+  get isLoggedIn(): boolean {
+    return this.userService.isLoggedIn();
   }
 
   toggleCarritoFijo() {
@@ -70,13 +80,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
-  }
-
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userData');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    this.userService.clearUser();
     this.router.navigate(['/login']);
   }
 

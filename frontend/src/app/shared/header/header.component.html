@@ -3,53 +3,64 @@
 
   <nav class="nav-links">
     <a routerLink="/">Inicio</a>
-    
+
     <!-- Menú de cuenta -->
     <div class="account-menu-container" 
          (mouseenter)="mostrarMenuCuentaHandler()" 
          (mouseleave)="ocultarMenuCuentaHandler()">
       <button class="account-icon">
-        <i class="fas fa-user-circle"></i>
-        <span *ngIf="!isLoggedIn()">Cuenta</span>
+        <fa-icon [icon]="faUserCircle"></fa-icon>
+        <span *ngIf="!userName">Cuenta</span>
       </button>
-      
+
       <div class="account-menu" *ngIf="mostrarMenuCuenta">
-        <a [routerLink]="['/login']" *ngIf="!isLoggedIn()">Iniciar sesión</a>
-        <a [routerLink]="['/register']" *ngIf="!isLoggedIn()">Registrarse</a>
-        
-        <div *ngIf="isLoggedIn()" class="logged-in-menu">
-          <div class="user-info">
-            <h4>{{userName}}</h4>
-            <p>{{userEmail}}</p>
+        <!-- Si no está logueado -->
+        <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
+          <a routerLink="/login">Iniciar sesión</a>
+          <a routerLink="/register">Registrarse</a>
+        </ng-container>
+
+        <!-- Si está logueado -->
+        <ng-template #loggedInBlock>
+          <div class="logged-in-menu">
+            <div class="user-info">
+              <h4>{{ userName }}</h4>
+              <p>{{ userEmail }}</p>
+            </div>
+            <a routerLink="/perfil">Ver cuenta</a>
+            <a (click)="logout()">Cerrar sesión</a>
           </div>
-          <a routerLink="/perfil">Ver cuenta</a>
-          <a (click)="logout()">Cerrar sesión</a>
-        </div>
+        </ng-template>
       </div>
     </div>
 
-    <!-- Carrito mejorado -->
+    <!-- Carrito -->
     <div class="carrito-container" [class.active]="carritoFijo">
-      <button [routerLink]="['/carrito']" class="carrito-btn" 
+      <button class="carrito-btn"
               (click)="toggleCarritoFijo()"
-              (mouseenter)="mostrarResumenCarritoHandler()">
-        <i class="fas fa-shopping-cart"></i>
+              (mouseenter)="mostrarResumenCarritoHandler()"
+              (mouseleave)="ocultarResumenCarritoHandler()">
+        <fa-icon [icon]="faShoppingCart"></fa-icon>
         <span>Carrito</span>
         <span *ngIf="totalCantidad > 0" class="carrito-contador">{{ totalCantidad }}</span>
       </button>
 
-      <div class="carrito-resumen" *ngIf="mostrarResumen || carritoFijo">
+      <div class="carrito-resumen" 
+           *ngIf="mostrarResumen || carritoFijo"
+           (mouseleave)="ocultarResumenCarritoHandler()">
         <div class="carrito-header">
           <h3>Tu Carrito</h3>
           <button class="close-carrito" (click)="toggleCarritoFijo()">
-            <i class="fas fa-times"></i>
+            <fa-icon [icon]="faTimes"></fa-icon>
           </button>
         </div>
-        
+
         <div class="carrito-content">
           <ul *ngIf="totalCantidad > 0; else emptyCart">
             <li *ngFor="let item of items">
-              <img [src]="item.imagen || 'assets/default-product.png'" alt="{{ item.nombre }}" class="item-imagen" />
+              <img [src]="item.imagen || 'assets/default-product.png'" 
+                   alt="{{ item.nombre }}" 
+                   class="item-imagen" />
               <div class="item-info">
                 <div class="item-nombre">{{ item.nombre }}</div>
                 <div class="item-detalles">
@@ -59,15 +70,15 @@
               </div>
             </li>
           </ul>
-          
+
           <ng-template #emptyCart>
             <div class="empty-cart">
-              <i class="fas fa-shopping-cart"></i>
+              <fa-icon [icon]="faShoppingCart"></fa-icon>
               <p>Tu carrito está vacío</p>
             </div>
           </ng-template>
         </div>
-        
+
         <div class="carrito-footer" *ngIf="totalCantidad > 0">
           <div class="total">
             Total: ${{ total | number }} CLP

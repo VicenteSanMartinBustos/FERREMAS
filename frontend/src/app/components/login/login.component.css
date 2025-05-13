@@ -1,56 +1,49 @@
-/* Estilos generales */
+/* Estilos mejorados para Login */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.login-card {
+.login-form {
   background: white;
   border-radius: 16px;
   width: 100%;
-  max-width: 450px;
+  max-width: 400px;
   overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.5s ease-out;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-out;
 }
 
 .login-header {
   background: linear-gradient(135deg, #121212 0%, #353435 100%);
   color: white;
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
 }
 
 .login-title {
   margin: 0;
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
-.login-subtitle {
-  margin: 0.5rem 0 0;
-  opacity: 0.9;
-  font-weight: 300;
-}
-
-.login-form {
-  padding: 2rem;
-}
-
+/* Campos de formulario mejorados */
 .form-group {
-  margin-bottom: 1.5rem;
+  padding: 0 1.5rem;
+  margin: 1.25rem 0;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #555;
+  color: #333;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .input-container {
@@ -59,116 +52,103 @@
   align-items: center;
 }
 
-.input-container i {
+.input-icon {
   position: absolute;
-  left: 15px;
-  color: #777;
+  left: 12px;
+  color: #666;
   font-size: 1rem;
 }
 
-.input-container input {
+.form-control {
   width: 100%;
-  padding: 12px 15px 12px 40px;
+  padding: 12px 12px 12px 38px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 
-.input-container input:focus {
-  border-color: #ff6be4;
-  box-shadow: 0 0 0 3px rgba(255, 107, 228, 0.2);
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
   outline: none;
+}
+
+/* Corrección especial para campo de contraseña */
+.password-field {
+  position: relative;
 }
 
 .toggle-password {
   position: absolute;
-  right: 40px;
-  padding-bottom: 15px;
+  right: 12px;
   background: none;
   border: none;
-  color: #777;
+  color: #666;
   cursor: pointer;
+  padding: 0;
   font-size: 1rem;
 }
 
-.form-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-}
-
-.remember-me {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.remember-me input {
-  margin-right: 8px;
-}
-
-.forgot-password {
-  color: #119ed6;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.forgot-password:hover {
-  color: #119ed6;
-  text-decoration: underline;
-}
-
-.login-button {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #05ef5f 0%, #83e483 100%);
+/* Botón mejorado */
+.login-btn {
+  display: block;
+  width: calc(100% - 3rem);
+  margin: 1.5rem auto;
+  padding: 12px;
+  background: #007bff;
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 107, 228, 0.3);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.2s ease;
 }
 
-.login-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 107, 228, 0.4);
+.login-btn:hover {
+  background: #0069d9;
+  transform: translateY(-1px);
 }
 
-.login-button:disabled {
-  background: #ccc;
+.login-btn:disabled {
+  background: #cccccc;
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
 }
 
-.loading-spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: spin 1s ease-in-out infinite;
+/* Estilos para alertas de error */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin: 0 1.5rem 1rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  animation: fadeIn 0.3s ease-out;
 }
 
-.login-footer {
-  margin-top: 2rem;
+.alert-error {
+  background-color: #fdecea;
+  color: #d32f2f;
+  border-left: 4px solid #d32f2f;
+}
+
+.alert-icon {
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+}
+
+/* Enlace de registro */
+.register-link {
   text-align: center;
+  padding: 0 1.5rem 1.5rem;
   font-size: 0.9rem;
   color: #666;
 }
 
 .register-link a {
-  color: #119ed6;
+  color: #007bff;
   text-decoration: none;
   font-weight: 500;
 }
@@ -177,93 +157,29 @@
   text-decoration: underline;
 }
 
-.social-login {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #eee;
-}
-
-.social-login p {
-  margin-bottom: 1rem;
-  color: #777;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.social-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.social-button:hover {
-  transform: translateY(-3px);
-}
-
-.social-button.google {
-  background: #db4437;
-}
-
-.social-button.facebook {
-  background: #4267b2;
-}
-
-.alert {
-  padding: 12px 15px;
-  border-radius: 8px;
-  margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-.alert.error {
-  background: #ffebee;
-  color: #c62828;
-}
-
-.alert i {
-  margin-right: 8px;
-  font-size: 1.1rem;
-}
-
 /* Animaciones */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
 }
 
 /* Responsive */
 @media (max-width: 480px) {
-  .login-container {
-    padding: 1rem;
-  }
-  
-  .login-card {
+  .login-form {
     border-radius: 12px;
   }
   
   .login-header {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
   
-  .login-form {
-    padding: 1.5rem;
+  .form-group {
+    padding: 0 1.25rem;
+  }
+  
+  .login-btn, .alert {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    width: calc(100% - 2.5rem);
   }
 }

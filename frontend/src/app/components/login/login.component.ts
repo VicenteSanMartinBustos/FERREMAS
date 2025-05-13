@@ -4,16 +4,15 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { 
-  faUser, 
-  faLock, 
-  faEye, 
+import {
+  faUser,
+  faLock,
+  faEye,
   faEyeSlash,
   faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
-
-
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +27,6 @@ export class LoginComponent {
   error = '';
   loading = false;
   showPassword = false;
-  rememberMe = false;
 
   // Iconos
   faUser = faUser;
@@ -37,12 +35,15 @@ export class LoginComponent {
   faEyeSlash = faEyeSlash;
   faExclamationCircle = faExclamationCircle;
 
-  constructor(private http: HttpClient, private router: Router) {}
-  
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
+  get isLoggedIn(): boolean {
+    return this.userService.isLoggedIn();
+  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -59,31 +60,35 @@ export class LoginComponent {
     this.loading = true;
     this.error = '';
 
-    this.http
-      .post('http://localhost:8000/api/usuarios/login/', {
-        username: this.username,
-        password: this.password,
-      })
-      .subscribe({
-        next: (res: any) => {
-          localStorage.setItem('access_token', res.access);
-          localStorage.setItem('refresh_token', res.refresh);
-          if (this.rememberMe) {
-            localStorage.setItem('rememberMe', 'true');
+    this.http.post('http://localhost:8000/api/usuarios/login/', {
+      username: this.username,
+      password: this.password,
+    }).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('access_token', res.access);
+        localStorage.setItem('refresh_token', res.refresh);
+
+        this.http.get('http://localhost:8000/api/usuarios/perfil/', {
+          headers: { Authorization: `Bearer ${res.access}` }
+        }).subscribe({
+          next: (perfil: any) => {
+            const user = {
+              name: perfil.username,
+              email: perfil.email
+            };
+            this.userService.setUser(user);
+            this.router.navigate(['/']);
+          },
+          error: () => {
+            this.error = 'Error al obtener perfil del usuario';
+            this.loading = false;
           }
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          this.loading = false;
-          if (err.status === 401) {
-            this.error = 'Credenciales incorrectas';
-          } else {
-            this.error = 'Error al conectar con el servidor. Intenta nuevamente.';
-          }
-        },
-        complete: () => {
-          this.loading = false;
-        }
-      });
+        });
+      },
+      error: () => {
+        this.error = 'Usuario o contraseña incorrectos';
+        this.loading = false;
+      }
+    });
   }
 }
