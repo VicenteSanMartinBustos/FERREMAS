@@ -1,4 +1,6 @@
 <header class="navbar">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
   <!-- Logo -->
   <button (click)="irAlInicio()" class="logo" aria-label="Ir al inicio">FERREMAS</button>
 
@@ -6,18 +8,26 @@
   <nav class="nav-links">
     <a routerLink="/">Inicio</a>
 
-    <!-- Menú de cuenta -->
-    <div 
-      class="account-menu-container" 
-      (mouseenter)="mostrarMenuCuentaHandler()" 
-      (mouseleave)="ocultarMenuCuentaHandler()">
-      
-      <button class="account-icon" aria-label="Menú de cuenta">
+    <!-- Menú de cuenta (modificado) -->
+    <div class="account-menu-container" [class.active]="menuCuentaFijo">
+      <button class="account-icon" 
+              (click)="toggleMenuCuentaFijo()"
+              aria-label="Menú de cuenta">
         <fa-icon [icon]="faUserCircle"></fa-icon>
         <span *ngIf="!userName">Cuenta</span>
+        <span *ngIf="userName">{{ userName }}</span>
       </button>
 
-      <div class="account-menu" *ngIf="mostrarMenuCuenta">
+      <div class="account-menu" *ngIf="mostrarMenuCuenta || menuCuentaFijo">
+        <div class="account-menu-header">
+          <h3>Mi Cuenta</h3>
+          <button class="close-account" 
+                  (click)="toggleMenuCuentaFijo()" 
+                  aria-label="Cerrar menú de cuenta">
+            <fa-icon [icon]="faTimes"></fa-icon>
+          </button>
+        </div>
+
         <!-- Usuario no logueado -->
         <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
           <a routerLink="/login">Iniciar sesión</a>
@@ -37,16 +47,17 @@
         </ng-template>
       </div>
     </div>
+  </nav>
+
 
     <!-- Carrito -->
     <div class="carrito-container" [class.active]="carritoFijo">
-      <button 
+      <button [routerLink]="['/carrito']"
         class="carrito-btn"
         (click)="toggleCarritoFijo()"
         (mouseenter)="mostrarResumenCarritoHandler()"
         (mouseleave)="ocultarResumenCarritoHandler()"
         aria-label="Ver resumen del carrito">
-        
         <fa-icon [icon]="faShoppingCart"></fa-icon>
         <span>Carrito</span>
         <span *ngIf="totalCantidad > 0" class="carrito-contador">{{ totalCantidad }}</span>
@@ -106,5 +117,4 @@
         </div>
       </div>
     </div>
-  </nav>
 </header>

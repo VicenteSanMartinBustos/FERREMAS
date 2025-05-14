@@ -1,6 +1,6 @@
 /* Estilos generales - Versión Dark Elegante */
 .perfil-container {
-  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'DM Sans', sans-serif;
   max-width: 600px;
   margin: 2rem auto;
   padding: 2.5rem;
@@ -145,7 +145,7 @@
 .perfil-datos p:first-of-type {
   background: rgba(0, 150, 255, 0.1);
   border-color: rgba(0, 150, 255, 0.3);
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.95rem;
 }
 

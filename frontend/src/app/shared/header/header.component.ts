@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
   tipoCambio = 1;
   userName = '';
   userEmail = '';
+  menuCuentaFijo = false; 
 
   // Iconos
   faUserCircle = faUserCircle;
@@ -66,6 +67,12 @@ export class HeaderComponent implements OnInit {
     return this.userService.isLoggedIn();
   }
 
+  // Métodos nuevos para el menú de cuenta
+  toggleMenuCuentaFijo() {
+    this.menuCuentaFijo = !this.menuCuentaFijo;
+    this.mostrarMenuCuenta = this.menuCuentaFijo;
+  }
+
   toggleCarritoFijo() {
     this.carritoFijo = !this.carritoFijo;
     this.mostrarResumen = this.carritoFijo;
@@ -88,8 +95,9 @@ export class HeaderComponent implements OnInit {
   }
 
   mostrarMenuCuentaHandler() {
-    this.mostrarMenuCuenta = true;
-  }
+ if (!this.menuCuentaFijo) {
+      this.mostrarMenuCuenta = true;
+    }  }
 
   ocultarMenuCuentaHandler() {
     this.mostrarMenuCuenta = false;
@@ -100,8 +108,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ocultarResumenCarritoHandler() {
-    if (!this.carritoFijo) {
-      this.mostrarResumen = false;
+   if (!this.menuCuentaFijo) {
+      this.mostrarMenuCuenta = false;
     }
   }
 }

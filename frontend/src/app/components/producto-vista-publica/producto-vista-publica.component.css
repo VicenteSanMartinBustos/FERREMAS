@@ -4,20 +4,23 @@
   margin: 0 auto;
   padding: 0 1rem;
   color: #e0e0e0;
+    font-family: 'DM Sans', sans-serif;
+
 }
 
-/* ===== BANNER DE BIENVENIDA ===== */
+/* ===== BANNER DE BIENVENIDA REESTILIZADO ===== */
 .banner-bienvenida {
-  background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
-  color: #ffffff;
-  padding: 3.5rem 2rem;
+  background: linear-gradient(145deg, #0d0d0d 0%, #1a1a1a 100%);
+  color: #e0e0e0;
+  padding: 4rem 2rem;
   text-align: center;
   margin-bottom: 3rem;
-  border-radius: 12px;
-  border: 1px solid rgba(100, 181, 246, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  border: 1px solid rgba(100, 181, 246, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
   position: relative;
   overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .banner-bienvenida::before {
@@ -27,35 +30,36 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at center, 
-    rgba(100, 181, 246, 0.1) 0%, 
-    transparent 70%);
-  animation: rotate 20s linear infinite;
+  background: radial-gradient(circle at center, rgba(100, 181, 246, 0.06), transparent 70%);
+  animation: slowPulse 25s infinite linear;
   z-index: 0;
+  opacity: 0.8;
 }
 
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes slowPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
 }
 
 .banner-bienvenida h1 {
-  font-size: 3rem;
+  font-size: 3.2rem;
   margin-bottom: 1.2rem;
   color: #ffffff;
-  text-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
-  font-weight: 600;
-  letter-spacing: 1px;
+  text-shadow: 0 0 20px rgba(100, 181, 246, 0.4);
+  font-weight: 700;
+  letter-spacing: 1.5px;
   position: relative;
   z-index: 1;
+  text-transform: uppercase;
 }
 
 .banner-subtitle {
-  font-size: 1.3rem;
-  max-width: 800px;
+  font-size: 1.4rem;
+  max-width: 780px;
   margin: 0 auto;
-  color: #bbbbbb;
-  line-height: 1.6;
+  color: #aab8c2;
+  line-height: 1.7;
+  font-weight: 400;
   position: relative;
   z-index: 1;
 }
@@ -63,12 +67,12 @@
 .banner-subtitle::after {
   content: '';
   display: block;
-  width: 150px;
+  width: 120px;
   height: 2px;
   background: linear-gradient(90deg, 
-    rgba(100, 181, 246, 0.5) 0%, 
+    rgba(100, 181, 246, 0.6) 0%, 
     rgba(100, 181, 246, 0) 100%);
-  margin: 1.5rem auto;
+  margin: 2rem auto 0;
 }
 
 /* ===== ENCABEZADO DE PRODUCTOS ===== */

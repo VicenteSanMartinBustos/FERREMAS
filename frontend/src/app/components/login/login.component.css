@@ -6,6 +6,7 @@
   min-height: 100vh;
   padding: 1rem;
   box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .login-card {

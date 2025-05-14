@@ -10,6 +10,7 @@
   padding: 1rem 5%;
   position: sticky;
   top: 0;
+  font-family: 'DM Sans', sans-serif;
   z-index: 1000;
   border-bottom: 1px solid rgba(100, 181, 246, 0.15);
   box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
@@ -23,7 +24,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: 'Kanit', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   letter-spacing: 1px;
   transition: all 0.3s ease;
 }
@@ -71,9 +72,10 @@
   color: #fff;
 }
 
-/* === CUENTA === */
+/* === CUENTA - VERSIÓN CORREGIDA === */
 .account-menu-container {
   position: relative;
+  display: inline-block; /* Añadido para contener el menú */
 }
 
 .account-icon {
@@ -101,34 +103,71 @@
 
 .account-menu {
   position: absolute;
-  top: 110%;
+  top: 100%; /* Cambiado de 110% a 100% */
   right: 0;
   background: rgba(40, 40, 40, 0.98);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(100, 181, 246, 0.15);
-  min-width: 220px;
+  min-width: 250px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  padding: 1rem 0;
+  padding: 0;
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
+  transform: translateY(5px); /* Reducido el desplazamiento */
+  transition: all 0.2s ease;
+  margin-top: 8px; /* Espacio entre el botón y el menú */
 }
 
-.account-menu-container:hover .account-menu {
+/* Mostrar menú */
+.account-menu-container:hover .account-menu,
+.account-menu-container.active .account-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
+/* Header del menú */
+.account-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.account-menu-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.close-account {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  padding: 4px;
+  line-height: 1;
+}
+
+.close-account:hover {
+  color: #64b5f6;
+  transform: rotate(90deg);
+}
+
+/* Items del menú */
 .account-menu a {
   display: block;
-  padding: 0.7rem 1.5rem;
-  color: rgba(255, 255, 255, 0.85);
+  padding: 12px 16px;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   transition: all 0.2s ease;
+  font-size: 0.95rem;
 }
 
 .account-menu a:hover {
@@ -136,27 +175,27 @@
   color: #64b5f6;
 }
 
+/* Sección de usuario logueado */
 .logged-in-menu {
   display: flex;
   flex-direction: column;
 }
 
 .user-info {
-  padding: 0.7rem 1.5rem;
-  border-bottom: 1px solid rgba(100, 181, 246, 0.1);
-  margin-bottom: 0.5rem;
-  color: #bbb;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .user-info h4 {
-  margin: 0 0 0.3rem 0;
+  margin: 0 0 4px 0;
   color: #fff;
+  font-size: 1rem;
 }
 
 .user-info p {
   margin: 0;
   font-size: 0.8rem;
-  color: #999;
+  color: #aaa;
 }
 
 /* === CARRITO === */

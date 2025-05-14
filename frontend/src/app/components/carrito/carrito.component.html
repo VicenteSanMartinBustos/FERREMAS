@@ -1,6 +1,8 @@
 <div class="carrito-container" *ngIf="items.length > 0; else noItems">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
   <div class="carrito-header">
-    <h2><i class="fas fa-shopping-cart"></i> Tu Carrito de Compras</h2>
+    <h2> Tu Carrito de Compras</h2>
     <span class="items-count">{{items.length}} {{items.length === 1 ? 'producto' : 'productos'}}</span>
   </div>
 
@@ -12,7 +14,6 @@
       
       <div class="item-info">
         <h3 class="item-nombre">{{ item.nombre }}</h3>
-        <div class="item-precio">${{ item.precio | number }}</div>
         
         <div class="cantidad-control">
           <button (click)="decrementarCantidad(item)" [disabled]="item.cantidad <= 1" class="cantidad-btn">
@@ -62,11 +63,13 @@
 
 <ng-template #noItems>
   <div class="carrito-vacio-container">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
     <div class="carrito-vacio">
-      <i class="fas fa-shopping-cart"></i>
+      <i class="fas fa-bag-shopping"></i> <!-- Cambiado a bolsa de compras -->
       <h3>Tu carrito está vacío</h3>
       <p>Agrega productos para comenzar</p>
-      <a [routerLink]="['/']" class="btn-comenzar">Comenzar a Comprar</a>
+      <a [routerLink]="['/']" class="btn-comenzar">Descubrir productos</a>
     </div>
   </div>
 </ng-template>
