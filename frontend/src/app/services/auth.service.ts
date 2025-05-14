@@ -12,7 +12,7 @@ interface LoginResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api/usuarios/';  // SI NO FUNCIONA CAMBIAR A localhost:8000/api/usuarios/  -- 11/05/2025 , 20:32
+  private apiUrl = 'http://localhost:8000/api/usuarios/'; 
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -54,5 +54,13 @@ export class AuthService {
       }
     });
   }
+
+  // auth.service.ts (o donde ya estés manejando el usuario)
+get esAdmin(): boolean {
+  const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+  return userData?.rol === 'administrador';
+}
+
+
  
 } 

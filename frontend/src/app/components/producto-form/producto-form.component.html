@@ -3,7 +3,7 @@
 
   <h2>{{ id ? 'Actualizar Producto' : 'Crear Producto' }}</h2>
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
+  <form [formGroup]="form" (ngSubmit)="guardar()"> 
     <label for="nombre">Nombre:</label>
     <input id="nombre" formControlName="nombre" type="text" />
 

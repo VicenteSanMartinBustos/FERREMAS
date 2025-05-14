@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuarioCrudComponent } from './components/usuario-crud/usuario-crud.component';
 
 
 export const routes: Routes = [
@@ -18,4 +19,5 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] }, 
+  { path: 'usuarios' , component: UsuarioCrudComponent}, // Ruta para el CRUD de usuarios
 ];

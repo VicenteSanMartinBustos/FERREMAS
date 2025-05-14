@@ -74,8 +74,10 @@ export class LoginComponent {
           next: (perfil: any) => {
             const user = {
               name: perfil.username,
-              email: perfil.email
+              email: perfil.email,
+              rol: perfil.rol
             };
+            localStorage.setItem('userData', JSON.stringify(user));
             this.userService.setUser(user);
             this.router.navigate(['/']);
           },

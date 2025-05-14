@@ -1,0 +1,59 @@
+<div *ngIf="!mostrar" class="form-container">
+  <p style="text-align:center; font-size: 18px; color: #fff;">⛔ No tienes permiso para ver esta página.</p>
+</div>
+
+<div *ngIf="mostrar" class="usuario-container">
+  <h2>📋 Lista de Usuarios</h2>
+  
+  <!-- Botón para crear nuevo usuario -->
+  <button (click)="crearNuevoUsuario()" class="btn-nuevo">Crear Nuevo Usuario</button>
+  <hr>
+
+  <!-- Lista de usuarios -->
+  <div *ngFor="let usuario of usuarios" class="usuario-list">
+    <div class="usuario-card">
+      <div class="usuario-info">
+        <h4>{{ usuario.username }}</h4>
+        <p class="rol">{{ usuario.rol }}</p>
+        <p>{{ usuario.email }}</p>
+      </div>
+      <div class="botones">
+        <button (click)="openEditModal(usuario)" class="btn-editar">Editar</button>
+        <button (click)="openDeleteModal(usuario.id)" class="btn-eliminar">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de edición -->
+<div *ngIf="editandoUsuario" class="modal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h3>Editar Usuario</h3>
+    <input type="text" [(ngModel)]="editandoUsuario.username" placeholder="Nombre de usuario" />
+    <input type="email" [(ngModel)]="editandoUsuario.email" placeholder="Correo electrónico" />
+    <select [(ngModel)]="editandoUsuario.rol">
+      <option value="administrador">Administrador</option>
+      <option value="cliente">Cliente</option>
+      <option value="vendedor">Vendedor</option>
+      <option value="bodeguero">Bodeguero</option>
+      <option value="contador">Contador</option>
+    </select>
+    <div class="botones">
+      <button (click)="actualizarUsuario()" class="btn-save">Guardar Cambios</button>
+      <button (click)="closeModal()" class="btn-cancel">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de confirmación de eliminación -->
+<div *ngIf="usuarioAEliminar" class="modal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h3>¿Estás seguro de eliminar este usuario?</h3>
+    <div class="botones">
+      <button (click)="eliminar(usuarioAEliminar)" class="btn-eliminar">Eliminar</button>
+      <button (click)="closeModal()" class="btn-cancel">Cancelar</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+.usuario-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background-color: #1e1e1e;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid #2c2c2c;
+  color: #f1f1f1;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.btn-nuevo {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  padding: 0.6rem 1.4rem;
+  background-color: #4da6ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-nuevo:hover {
+  background-color: #3399ff;
+}
+
+.usuario-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.usuario-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #2b2b2b;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid #3a3a3a;
+  transition: transform 0.2s ease;
+}
+
+.usuario-card:hover {
+  transform: translateY(-2px);
+}
+
+.usuario-info {
+  flex-grow: 1;
+}
+
+.usuario-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #ddd;
+  font-weight: 600;
+}
+
+.rol {
+  color: #00e676; /* verde neón */
+  font-weight: bold;
+  margin-top: 0.3rem;
+}
+
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.botones button {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Botones individuales */
+.btn-ver {
+  background-color: #6c757d;
+  color: white;
+}
+.btn-ver:hover {
+  background-color: #5a6268;
+}
+
+.btn-editar {
+  background-color: #0d6efd;
+  color: white;
+}
+.btn-editar:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+.btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+/* Responsive básico */
+@media (max-width: 600px) {
+  .usuario-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .usuario-info h4 {
+    font-size: 1rem;
+  }
+
+  .botones {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .botones button {
+    width: 100%;
+  }
+}
+
