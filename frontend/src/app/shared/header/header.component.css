@@ -387,38 +387,129 @@
   color: #999;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
+/* === MEDIA QUERIES - RESPONSIVE HEADER === */
+@media (max-width: 1200px) {
   .navbar {
-    padding: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    padding: 1rem 3%;
   }
-
+  
   .nav-links {
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
-    gap: 1rem;
+    gap: 1.5rem;
   }
+}
 
+@media (max-width: 992px) {
+  .logo {
+    font-size: 1.8rem;
+  }
+  
+  .nav-links > a {
+    font-size: 1rem;
+  }
+  
   .account-icon span,
   .carrito-btn span {
     display: none;
   }
-
-  .carrito-resumen {
-    width: 95vw;
-    right: 0;
-    left: 0;
-    border-radius: 0;
+  
+  .account-icon,
+  .carrito-btn {
+    padding: 0.5rem;
   }
+  
+  .account-icon i,
+  .carrito-btn i {
+    font-size: 1.3rem;
+  }
+}
 
-  .account-menu {
-    width: 95vw;
-    right: 0;
-    left: 0;
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 0.8rem 5%;
+    position: relative;
+  }
+  
+  .logo {
+    order: 1;
+    font-size: 1.7rem;
+    margin-right: auto;
+  }
+  
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 0.5rem;
+  }
+  
+  .nav-links > a {
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+  }
+  
+  .account-menu-container,
+  .carrito-container {
+    order: 2;
+  }
+  
+  .account-menu,
+  .carrito-resumen {
+    width: 100vw;
+    right: -5%;
+    left: -5%;
     border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .account-menu {
+    top: 100%;
+  }
+  
+  .carrito-resumen {
+    top: 100%;
+    max-height: 50vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .nav-links > a {
+    font-size: 0.9rem;
+  }
+  
+  .account-icon i,
+  .carrito-btn i {
+    font-size: 1.2rem;
+  }
+  
+  .carrito-contador {
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    top: -4px;
+    right: -4px;
+  }
+}
+
+/* Estilos adicionales para mejor comportamiento */
+@media (hover: none) {
+  .account-menu-container:hover .account-menu,
+  .carrito-container:hover .carrito-resumen {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .account-menu-container.active .account-menu,
+  .carrito-container.active .carrito-resumen {
+    opacity: 1;
+    visibility: visible;
   }
 }
