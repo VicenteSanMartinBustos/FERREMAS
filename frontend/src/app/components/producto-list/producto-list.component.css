@@ -1,131 +1,151 @@
 .producto-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  background-color: #fdfdfd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    font-family: 'DM Sans', sans-serif;
-
+  padding: 1.5rem;
+  border-radius: 16px;
+  background-color: #1e1e1e;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid #2c2c2c;
+  color: #f1f1f1;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 1rem;
-  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .btn-nuevo {
   display: block;
-  margin: 0 auto 1rem auto;
-  padding: 0.5rem 1rem;
-  background-color: #4caf50;
+  margin: 0 auto 1.5rem auto;
+  padding: 0.6rem 1.4rem;
+  background-color: #4da6ff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .btn-nuevo:hover {
-  background-color: #45a049;
+  background-color: #3399ff;
 }
 
 .producto-list {
   list-style: none;
   padding: 0;
-}
-
-.producto-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fafafa;
-  padding: 0.75rem;
-  margin-bottom: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.precio {
-  color: #00796b;
-  font-weight: bold;
-}
-
-.btn-editar {
-  padding: 0.3rem 0.8rem;
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn-editar:hover {
-  background-color: #1976d2;
-}
-
-.botones {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.btn-ver {
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn-editar {
-  background-color: #0d6efd;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn-eliminar {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
+  margin: 0;
 }
 
 .producto-card {
   display: flex;
   align-items: center;
-  border: 1px solid #ddd;
+  gap: 1rem;
+  background: #2b2b2b;
+  padding: 1rem;
+  margin-bottom: 1rem;
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-  background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid #3a3a3a;
+  transition: transform 0.2s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-2px);
 }
 
 .producto-imagen {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  margin-right: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background-color: #1a1a1a;
 }
 
 .producto-info {
   flex-grow: 1;
 }
 
+.producto-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #ddd;
+  font-weight: 600;
+}
+
+.precio {
+  color: #00e676; /* verde neón */
+  font-weight: bold;
+  margin-top: 0.3rem;
+}
+
 .botones {
-  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
 }
 
 .botones button {
-  margin-right: 8px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Botones individuales */
+.btn-ver {
+  background-color: #6c757d;
+  color: white;
+}
+.btn-ver:hover {
+  background-color: #5a6268;
+}
+
+.btn-editar {
+  background-color: #0d6efd;
+  color: white;
+}
+.btn-editar:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+.btn-eliminar:hover {
+  background-color: #c82333;
+}
+
+/* Responsive básico */
+@media (max-width: 600px) {
+  .producto-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .producto-imagen {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+  }
+
+  .botones {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .botones button {
+    width: 100%;
+  }
 }
