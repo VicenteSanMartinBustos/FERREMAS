@@ -5,8 +5,28 @@
 <div *ngIf="mostrar" class="usuario-container">
   <h2>📋 Lista de Usuarios</h2>
   
-  <!-- Botón para crear nuevo usuario -->
-  <button (click)="crearNuevoUsuario()" class="btn-nuevo">Crear Nuevo Usuario</button>
+  <!-- Botón para mostrar formulario nuevo usuario -->
+  <button (click)="crearNuevoUsuario()" class="btn-nuevo" *ngIf="!mostrarFormularioNuevo">Crear Nuevo Usuario</button>
+
+  <!-- Formulario nuevo usuario -->
+  <div *ngIf="mostrarFormularioNuevo" class="nuevo-usuario-form">
+    <h3>Crear Nuevo Usuario</h3>
+    <input type="text" [(ngModel)]="nuevoUsuario.username" placeholder="Nombre de usuario" />
+    <input type="email" [(ngModel)]="nuevoUsuario.email" placeholder="Correo electrónico" />
+    <select [(ngModel)]="nuevoUsuario.rol">
+      <option value="" disabled selected>Selecciona un rol</option>
+      <option value="administrador">Administrador</option>
+      <option value="cliente">Cliente</option>
+      <option value="vendedor">Vendedor</option>
+      <option value="bodeguero">Bodeguero</option>
+      <option value="contador">Contador</option>
+    </select>
+    <div class="botones">
+      <button (click)="guardarUsuario()" class="btn-save">Guardar</button>
+      <button (click)="cancelarNuevoUsuario()" class="btn-cancel">Cancelar</button>
+    </div>
+  </div>
+
   <hr>
 
   <!-- Lista de usuarios -->

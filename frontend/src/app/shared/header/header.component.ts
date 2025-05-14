@@ -4,7 +4,7 @@ import { ItemCarrito } from '../../carrito.interface';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUserCircle, faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faShoppingCart, faTimes, faUsers, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
@@ -25,12 +25,15 @@ export class HeaderComponent implements OnInit {
   tipoCambio = 1;
   userName = '';
   userEmail = '';
+  userRol = '';
   menuCuentaFijo = false; 
 
   // Iconos
   faUserCircle = faUserCircle;
   faShoppingCart = faShoppingCart;
   faTimes = faTimes;
+  faUsers = faUsers;
+  faBoxOpen = faBoxOpen;
 
   constructor(
     private carritoService: CarritoService,
@@ -56,9 +59,11 @@ export class HeaderComponent implements OnInit {
       if (user) {
         this.userName = user.name;
         this.userEmail = user.email;
+        this.userRol = (user as any).rol || '';
       } else {
         this.userName = '';
         this.userEmail = '';
+        this.userRol = '';
       }
     });
   }
@@ -67,7 +72,10 @@ export class HeaderComponent implements OnInit {
     return this.userService.isLoggedIn();
   }
 
-  // Métodos nuevos para el menú de cuenta
+  get puedeVerProductos(): boolean {
+    return this.userRol === 'administrador' || this.userRol === 'vendedor';
+  }
+
   toggleMenuCuentaFijo() {
     this.menuCuentaFijo = !this.menuCuentaFijo;
     this.mostrarMenuCuenta = this.menuCuentaFijo;
@@ -95,9 +103,10 @@ export class HeaderComponent implements OnInit {
   }
 
   mostrarMenuCuentaHandler() {
- if (!this.menuCuentaFijo) {
+    if (!this.menuCuentaFijo) {
       this.mostrarMenuCuenta = true;
-    }  }
+    }
+  }
 
   ocultarMenuCuentaHandler() {
     this.mostrarMenuCuenta = false;
@@ -108,7 +117,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ocultarResumenCarritoHandler() {
-   if (!this.menuCuentaFijo) {
+    if (!this.menuCuentaFijo) {
       this.mostrarMenuCuenta = false;
     }
   }

@@ -499,6 +499,18 @@
   }
 }
 
+.link-usuarios fa-icon {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.link-usuarios fa-icon,
+.link-productos fa-icon {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+
 /* Estilos adicionales para mejor comportamiento */
 @media (hover: none) {
   .account-menu-container:hover .account-menu,

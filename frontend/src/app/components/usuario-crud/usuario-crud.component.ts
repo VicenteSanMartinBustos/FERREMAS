@@ -16,6 +16,7 @@ export class UsuarioCrudComponent implements OnInit {
   editandoUsuario: any = null;
   usuarioAEliminar: any = null;
   nuevoUsuario: any = { username: '', email: '', rol: '' };
+  mostrarFormularioNuevo: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -30,14 +31,12 @@ export class UsuarioCrudComponent implements OnInit {
   }
 
   cargarUsuarios(): void {
-    const token = localStorage.getItem('access_token');  // Obtener el token del almacenamiento local
+    const token = localStorage.getItem('access_token');  // Obtener el token
     if (token) {
       this.http.get<any[]>('http://localhost:8000/api/usuarios/', {
-        headers: { Authorization: `Bearer ${token}` }  // Añadir el token al encabezado
-      })
-      .subscribe({
+        headers: { Authorization: `Bearer ${token}` }
+      }).subscribe({
         next: (data) => {
-          console.log(data);  // Ver datos
           this.usuarios = data;
         },
         error: (error) => {
@@ -49,22 +48,33 @@ export class UsuarioCrudComponent implements OnInit {
     }
   }
 
+  crearNuevoUsuario(): void {
+    this.mostrarFormularioNuevo = true;
+  }
+
+  cancelarNuevoUsuario(): void {
+    this.mostrarFormularioNuevo = false;
+    this.nuevoUsuario = { username: '', email: '', rol: '' };
+  }
+
   guardarUsuario(): void {
-    const token = localStorage.getItem('access_token');  // Obtener el token
+    const token = localStorage.getItem('access_token');
     this.http.post('http://localhost:8000/api/usuarios/', this.nuevoUsuario, {
-      headers: { Authorization: `Bearer ${token}` }  // Añadir el token al encabezado
-    })
-      .subscribe({
-        next: () => {
-          this.nuevoUsuario = { username: '', email: '', rol: '' };
-          this.cargarUsuarios();
-        },
-        error: (error) => console.error('Error al guardar usuario:', error)
-      });
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: () => {
+        this.nuevoUsuario = { username: '', email: '', rol: '' };
+        this.mostrarFormularioNuevo = false;
+        this.cargarUsuarios();
+      },
+      error: (error) => {
+        console.error('Error al guardar usuario:', error);
+      }
+    });
   }
 
   openEditModal(usuario: any): void {
-    this.editandoUsuario = { ...usuario }; // Clonar el objeto para editar
+    this.editandoUsuario = { ...usuario };
   }
 
   closeModal(): void {
@@ -77,34 +87,32 @@ export class UsuarioCrudComponent implements OnInit {
   }
 
   actualizarUsuario(): void {
-    const token = localStorage.getItem('access_token');  // Obtener el token
+    const token = localStorage.getItem('access_token');
     this.http.put(`http://localhost:8000/api/usuarios/${this.editandoUsuario.id}/`, this.editandoUsuario, {
-      headers: { Authorization: `Bearer ${token}` }  // Añadir el token al encabezado
-    })
-      .subscribe({
-        next: () => {
-          this.cargarUsuarios();
-          this.closeModal(); // Cerrar el modal después de la actualización
-        },
-        error: (error) => console.error('Error al actualizar usuario:', error)
-      });
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: () => {
+        this.cargarUsuarios();
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error al actualizar usuario:', error);
+      }
+    });
   }
 
   eliminar(id: number): void {
-    const token = localStorage.getItem('access_token');  // Obtener el token
+    const token = localStorage.getItem('access_token');
     this.http.delete(`http://localhost:8000/api/usuarios/${id}/`, {
-      headers: { Authorization: `Bearer ${token}` }  // Añadir el token al encabezado
-    })
-      .subscribe({
-        next: () => {
-          this.cargarUsuarios();
-          this.closeModal(); // Cerrar el modal después de la eliminación
-        },
-        error: (error) => console.error('Error al eliminar usuario:', error)
-      });
-  }
-
-  crearNuevoUsuario(): void {
-    this.router.navigate(['/usuarios/nuevo']);
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: () => {
+        this.cargarUsuarios();
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error al eliminar usuario:', error);
+      }
+    });
   }
 }

@@ -1,5 +1,5 @@
 <header class="navbar">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Logo -->
   <button (click)="irAlInicio()" class="logo" aria-label="Ir al inicio">FERREMAS</button>
@@ -8,7 +8,17 @@
   <nav class="nav-links">
     <a routerLink="/">Inicio</a>
 
-    <!-- Menú de cuenta (modificado) -->
+    <!-- Link Productos visible solo para admin y vendedor -->
+    <a *ngIf="puedeVerProductos" routerLink="/productos" class="link-productos">
+      <fa-icon [icon]="faBoxOpen"></fa-icon> Productos
+    </a>
+
+    <!-- Link Usuarios solo para admin -->
+    <a *ngIf="userRol === 'administrador'" routerLink="/usuarios" class="link-usuarios">
+      <fa-icon [icon]="faUsers"></fa-icon> Usuarios
+    </a>
+
+    <!-- Menú de cuenta -->
     <div class="account-menu-container" [class.active]="menuCuentaFijo">
       <button class="account-icon" 
               (click)="toggleMenuCuentaFijo()"
@@ -28,13 +38,11 @@
           </button>
         </div>
 
-        <!-- Usuario no logueado -->
         <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
           <a routerLink="/login">Iniciar sesión</a>
           <a routerLink="/register">Registrarse</a>
         </ng-container>
 
-        <!-- Usuario logueado -->
         <ng-template #loggedInBlock>
           <div class="logged-in-menu">
             <div class="user-info">
@@ -49,72 +57,67 @@
     </div>
   </nav>
 
+  <!-- Carrito -->
+  <div class="carrito-container" [class.active]="carritoFijo">
+    <button [routerLink]="['/carrito']"
+      class="carrito-btn"
+      (click)="toggleCarritoFijo()"
+      (mouseenter)="mostrarResumenCarritoHandler()"
+      (mouseleave)="ocultarResumenCarritoHandler()"
+      aria-label="Ver resumen del carrito">
+      <fa-icon [icon]="faShoppingCart"></fa-icon>
+      <span>Carrito</span>
+      <span *ngIf="totalCantidad > 0" class="carrito-contador">{{ totalCantidad }}</span>
+    </button>
 
-    <!-- Carrito -->
-    <div class="carrito-container" [class.active]="carritoFijo">
-      <button [routerLink]="['/carrito']"
-        class="carrito-btn"
-        (click)="toggleCarritoFijo()"
-        (mouseenter)="mostrarResumenCarritoHandler()"
-        (mouseleave)="ocultarResumenCarritoHandler()"
-        aria-label="Ver resumen del carrito">
-        <fa-icon [icon]="faShoppingCart"></fa-icon>
-        <span>Carrito</span>
-        <span *ngIf="totalCantidad > 0" class="carrito-contador">{{ totalCantidad }}</span>
-      </button>
+    <div 
+      class="carrito-resumen" 
+      *ngIf="mostrarResumen || carritoFijo"
+      (mouseleave)="ocultarResumenCarritoHandler()">
 
-      <!-- Resumen del carrito -->
-      <div 
-        class="carrito-resumen" 
-        *ngIf="mostrarResumen || carritoFijo"
-        (mouseleave)="ocultarResumenCarritoHandler()">
+      <div class="carrito-header">
+        <h3>Tu Carrito</h3>
+        <button 
+          class="close-carrito" 
+          (click)="toggleCarritoFijo()" 
+          aria-label="Cerrar resumen del carrito">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </div>
 
-        <div class="carrito-header">
-          <h3>Tu Carrito</h3>
-          <button 
-            class="close-carrito" 
-            (click)="toggleCarritoFijo()" 
-            aria-label="Cerrar resumen del carrito">
-            <fa-icon [icon]="faTimes"></fa-icon>
-          </button>
-        </div>
-
-        <div class="carrito-content">
-          <!-- Lista de productos -->
-          <ul *ngIf="totalCantidad > 0; else emptyCart">
-            <li *ngFor="let item of items">
-              <img 
-                [src]="item.imagen || 'assets/default-product.png'" 
-                [alt]="item.nombre" 
-                class="item-imagen" />
-              
-              <div class="item-info">
-                <div class="item-nombre">{{ item.nombre }}</div>
-                <div class="item-detalles">
-                  {{ item.cantidad }} x ${{ item.precio | number }} CLP
-                  <span class="precio-usd">(USD {{ (item.precio / tipoCambio).toFixed(2) }})</span>
-                </div>
+      <div class="carrito-content">
+        <ul *ngIf="totalCantidad > 0; else emptyCart">
+          <li *ngFor="let item of items">
+            <img 
+              [src]="item.imagen || 'assets/default-product.png'" 
+              [alt]="item.nombre" 
+              class="item-imagen" />
+            
+            <div class="item-info">
+              <div class="item-nombre">{{ item.nombre }}</div>
+              <div class="item-detalles">
+                {{ item.cantidad }} x ${{ item.precio | number }} CLP
+                <span class="precio-usd">(USD {{ (item.precio / tipoCambio).toFixed(2) }})</span>
               </div>
-            </li>
-          </ul>
-
-          <!-- Carrito vacío -->
-          <ng-template #emptyCart>
-            <div class="empty-cart">
-              <fa-icon [icon]="faShoppingCart"></fa-icon>
-              <p>Tu carrito está vacío</p>
             </div>
-          </ng-template>
-        </div>
+          </li>
+        </ul>
 
-        <!-- Total y botón -->
-        <div class="carrito-footer" *ngIf="totalCantidad > 0">
-          <div class="total">
-            Total: ${{ total | number }} CLP
-            <span class="total-usd">(USD {{ (total / tipoCambio).toFixed(2) }})</span>
+        <ng-template #emptyCart>
+          <div class="empty-cart">
+            <fa-icon [icon]="faShoppingCart"></fa-icon>
+            <p>Tu carrito está vacío</p>
           </div>
-          <button class="btn-ir-carrito" (click)="irAlCarrito()">Ir al carrito</button>
+        </ng-template>
+      </div>
+
+      <div class="carrito-footer" *ngIf="totalCantidad > 0">
+        <div class="total">
+          Total: ${{ total | number }} CLP
+          <span class="total-usd">(USD {{ (total / tipoCambio).toFixed(2) }})</span>
         </div>
+        <button class="btn-ir-carrito" (click)="irAlCarrito()">Ir al carrito</button>
       </div>
     </div>
+  </div>
 </header>

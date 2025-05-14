@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -14,11 +14,28 @@ import Swal from 'sweetalert2';
 export class ProductoListComponent implements OnInit {
   productos: any[] = [];
 
-  constructor(private productoService: ProductoService) {}
+  constructor(
+    private productoService: ProductoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.productoService.getProductos().subscribe(data => {
-      this.productos = data;
+    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+    if (userData?.rol === 'administrador' || userData?.rol === 'vendedor') {
+      this.cargarProductos();
+    } else {
+      this.router.navigate(['/error']); // Redirigir si no tiene permiso
+    }
+  }
+
+  cargarProductos(): void {
+    this.productoService.getProductos().subscribe({
+      next: data => {
+        this.productos = data;
+      },
+      error: err => {
+        console.error('Error al cargar productos', err);
+      }
     });
   }
 
@@ -54,6 +71,4 @@ export class ProductoListComponent implements OnInit {
       confirmButtonText: 'Cerrar'
     });
   }
-  
 }
-
