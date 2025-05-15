@@ -356,3 +356,121 @@
     justify-content: space-between;
   }
 }
+
+/* Contenedor principal */
+.carrito-vacio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+/* Tarjeta de carrito vacío */
+.carrito-vacio {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  padding: 2.5rem;
+  background: rgba(40, 40, 40, 0.9);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Icono */
+.carrito-vacio fa-icon {
+  font-size: 4.5rem;
+  color: #64b5f6;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+/* Texto */
+.carrito-vacio h3 {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.carrito-vacio p {
+  color: #b0b0b0;
+  font-size: 1.1rem;
+  margin-bottom: 2.2rem;
+  line-height: 1.6;
+}
+
+.btn-comenzar {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  background-color: #e63946; /* Rojo sofisticado */
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.4s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 8px rgba(230, 57, 70, 0.6),
+    0 0 15px rgba(230, 57, 70, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-comenzar:hover {
+  background-color: #ef476f;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 0 12px rgba(239, 71, 111, 0.7),
+    0 0 20px rgba(239, 71, 111, 0.4);
+}
+
+.btn-comenzar::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: all 0.6s ease;
+}
+
+.btn-comenzar:hover::after {
+  left: 100%;
+}
+
+/* Efecto de pulso sutil */
+@keyframes subtle-glow {
+  0% {
+    box-shadow: 
+      0 0 8px rgba(230, 57, 70, 0.6),
+      0 0 15px rgba(230, 57, 70, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px rgba(230, 57, 70, 0.7),
+      0 0 18px rgba(230, 57, 70, 0.35);
+  }
+  100% {
+    box-shadow: 
+      0 0 8px rgba(230, 57, 70, 0.6),
+      0 0 15px rgba(230, 57, 70, 0.3);
+  }
+}
+
+.btn-comenzar {
+  animation: subtle-glow 3s infinite ease-in-out;
+}
