@@ -1,9 +1,9 @@
 <div class="carrito-container" *ngIf="items.length > 0; else noItems">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <div class="carrito-header">
-    <h2> Tu Carrito de Compras</h2>
-    <span class="items-count">{{items.length}} {{items.length === 1 ? 'producto' : 'productos'}}</span>
+    <h2>Tu Carrito de Compras</h2>
+    <span class="items-count">{{ items.length }} {{ items.length === 1 ? 'producto' : 'productos' }}</span>
   </div>
 
   <div class="carrito-items">
@@ -11,28 +11,51 @@
       <div class="item-imagen-container">
         <img [src]="item.imagen || 'assets/default-product.png'" alt="{{ item.nombre }}" class="producto-imagen" />
       </div>
-      
+
       <div class="item-info">
         <h3 class="item-nombre">{{ item.nombre }}</h3>
-        
+
         <div class="cantidad-control">
           <button (click)="decrementarCantidad(item)" [disabled]="item.cantidad <= 1" class="cantidad-btn">
-            <i class="fas fa-minus"></i>
+            <fa-icon [icon]="faMinus"></fa-icon>
           </button>
           <span class="cantidad">{{ item.cantidad }}</span>
           <button (click)="incrementarCantidad(item)" class="cantidad-btn">
-            <i class="fas fa-plus"></i>
+            <fa-icon [icon]="faPlus"></fa-icon>
           </button>
         </div>
       </div>
-      
+
       <div class="item-subtotal">
         <div class="subtotal">${{ (item.precio * item.cantidad) | number }}</div>
-        <button (click)="eliminarProducto(item.id)" class="btn-eliminar">
-          <i class="fas fa-trash-alt"></i>
+        <button (click)="eliminarProducto(item.id)" class="btn-eliminar" aria-label="Eliminar producto">
+          <fa-icon [icon]="faTrashAlt"></fa-icon>
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- Método de retiro -->
+  <div class="opciones-envio">
+    <h3>Selecciona el método de retiro</h3>
+    <label>
+      <input
+        type="radio"
+        name="metodoRetiro"
+        [(ngModel)]="metodoRetiro"
+        value="retiro_tienda"
+      />
+      Retiro en tienda
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="metodoRetiro"
+        [(ngModel)]="metodoRetiro"
+        value="domicilio"
+      />
+      Despacho a domicilio
+    </label>
   </div>
 
   <div class="carrito-resumen">
@@ -46,16 +69,21 @@
     </div>
     <div class="resumen-linea total">
       <span>Total</span>
-      <span>${{ (total + (total > 50000 ? 0 : 3000)) | number }}</span>
+      <span>${{ (total + (total > 50000 || metodoRetiro === 'retiro_tienda' ? 0 : 3000)) | number }}</span>
     </div>
-    
+
+    <!-- Mensaje de envío gratis -->
+    <div class="envio-gratis-message" *ngIf="total < 49990">
+      A partir de <strong>$49.990</strong> tu envío será gratis!
+    </div>
+
     <button class="btn-pago" (click)="procederAlPago()">
-      <i class="fas fa-credit-card"></i> Proceder al Pago
+      <fa-icon [icon]="faCreditCard"></fa-icon> Proceder al Pago
     </button>
-    
+
     <div class="continuar-comprando">
       <a [routerLink]="['/']" class="btn-continuar">
-        <i class="fas fa-arrow-left"></i> Seguir Comprando
+        <fa-icon [icon]="faArrowLeft"></fa-icon> Seguir Comprando
       </a>
     </div>
   </div>
@@ -63,10 +91,10 @@
 
 <ng-template #noItems>
   <div class="carrito-vacio-container">
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 
     <div class="carrito-vacio">
-      <i class="fas fa-bag-shopping"></i> <!-- Cambiado a bolsa de compras -->
+      <fa-icon [icon]="faShoppingCart"></fa-icon>
       <h3>Tu carrito está vacío</h3>
       <p>Agrega productos para comenzar</p>
       <a [routerLink]="['/']" class="btn-comenzar">Descubrir productos</a>

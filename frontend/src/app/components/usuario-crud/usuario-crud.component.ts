@@ -15,8 +15,6 @@ export class UsuarioCrudComponent implements OnInit {
   usuarios: any[] = [];
   editandoUsuario: any = null;
   usuarioAEliminar: any = null;
-  nuevoUsuario: any = { username: '', email: '', rol: '' };
-  mostrarFormularioNuevo: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -31,7 +29,7 @@ export class UsuarioCrudComponent implements OnInit {
   }
 
   cargarUsuarios(): void {
-    const token = localStorage.getItem('access_token');  // Obtener el token
+    const token = localStorage.getItem('access_token');
     if (token) {
       this.http.get<any[]>('http://localhost:8000/api/usuarios/', {
         headers: { Authorization: `Bearer ${token}` }
@@ -46,31 +44,6 @@ export class UsuarioCrudComponent implements OnInit {
     } else {
       console.error('No hay token de acceso');
     }
-  }
-
-  crearNuevoUsuario(): void {
-    this.mostrarFormularioNuevo = true;
-  }
-
-  cancelarNuevoUsuario(): void {
-    this.mostrarFormularioNuevo = false;
-    this.nuevoUsuario = { username: '', email: '', rol: '' };
-  }
-
-  guardarUsuario(): void {
-    const token = localStorage.getItem('access_token');
-    this.http.post('http://localhost:8000/api/usuarios/', this.nuevoUsuario, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).subscribe({
-      next: () => {
-        this.nuevoUsuario = { username: '', email: '', rol: '' };
-        this.mostrarFormularioNuevo = false;
-        this.cargarUsuarios();
-      },
-      error: (error) => {
-        console.error('Error al guardar usuario:', error);
-      }
-    });
   }
 
   openEditModal(usuario: any): void {

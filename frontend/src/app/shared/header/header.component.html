@@ -75,7 +75,8 @@
       *ngIf="mostrarResumen || carritoFijo"
       (mouseleave)="ocultarResumenCarritoHandler()">
 
-      <div class="carrito-header">
+      <div [routerLink]="['/carrito']" class="carrito-header">
+        
         <h3>Tu Carrito</h3>
         <button 
           class="close-carrito" 

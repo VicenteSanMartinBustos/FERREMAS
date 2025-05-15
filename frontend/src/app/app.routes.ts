@@ -19,5 +19,5 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] }, 
-  { path: 'usuarios' , component: UsuarioCrudComponent}, // Ruta para el CRUD de usuarios
+  { path: 'usuarios' , component: UsuarioCrudComponent}, 
 ];
