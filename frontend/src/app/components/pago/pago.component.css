@@ -1,0 +1,123 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: radial-gradient(circle at center, #1a1a1e 0%, #121215 100%);
+  font-family: 'DM Sans', sans-serif;
+  padding: 1rem;
+}
+
+.pago-container {
+  background: linear-gradient(145deg, #252529 0%, #1e1e22 100%);
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border-radius: clamp(0.75rem, 2vw, 1.25rem);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  text-align: center;
+  width: 90%;
+  max-width: min(420px, 90vw);
+  color: #f4f4f5;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* Responsive typography */
+h2 {
+  margin-bottom: clamp(1rem, 4vw, 1.75rem);
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  position: relative;
+  display: inline-block;
+}
+
+.price-display {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  margin: clamp(1rem, 3vw, 1.5rem) 0;
+}
+
+/* Responsive elements */
+#paypal-button-container {
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+  min-height: 40px; /* Ensure button has minimum height */
+}
+
+.payment-methods {
+  font-size: clamp(0.75rem, 3vw, 0.85rem);
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+}
+
+.security-badge {
+  font-size: clamp(0.7rem, 3vw, 0.8rem);
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+  :host {
+    min-height: 70vh;
+    padding: 0.5rem;
+  }
+
+  .pago-container {
+    padding: 1.25rem;
+    width: 95%;
+  }
+
+  .price-display span {
+    padding: 0.4rem 0.8rem;
+  }
+
+  /* Stack payment methods on very small screens */
+  .payment-methods {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 481px) and (max-width: 768px) {
+  .pago-container {
+    max-width: 380px;
+  }
+}
+
+/* Large screen enhancements */
+@media (min-width: 1200px) {
+  .pago-container {
+    max-width: 450px;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+  :host {
+    min-height: 90vh;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  .pago-container {
+    border: 2px solid #6d28d9;
+  }
+  
+  h2::after {
+    height: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  #paypal-button-container {
+    transition: none;
+  }
+}

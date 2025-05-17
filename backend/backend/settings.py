@@ -44,7 +44,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'productos',
     'usuarios',
+    'pagos',
 ]
+
+# PAYPAL CONFIG
+PAYPAL_CLIENT_ID = 'AdUHcJ79l61aDnHoyjAe7x5_ZYnkCt1Z_CUScYLAEaW_Z5SV-D0Ck809ZqB28Fu0H85aGN3d7Jg4FFK2'
+PAYPAL_CLIENT_SECRET = 'EB87YktBzmEZ0KEjEzX5bEPt6l7iKJdNyI14itpLKqVA7g8Ujxaq9a-XbArsbNy_tYKZSCOtXVPqz5GT'
+PAYPAL_MODE = 'sandbox'  # Usa 'live' en producción
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
 

@@ -8,7 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuarioCrudComponent } from './components/usuario-crud/usuario-crud.component';
-
+import { PagoComponent } from './components/pago/pago.component';
 
 export const routes: Routes = [
   { path: '', component: ProductoVistaPublicaComponent },
@@ -20,4 +20,5 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] }, 
   { path: 'usuarios' , component: UsuarioCrudComponent}, 
+  { path: 'pago', component: PagoComponent, canActivate: [AuthGuard] },
 ];
