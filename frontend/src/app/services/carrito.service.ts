@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ItemCarrito } from '../carrito.interface';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -10,15 +10,16 @@ import { isPlatformBrowser } from '@angular/common';
 export class CarritoService {
   private carritoItems: ItemCarrito[] = [];
   private carritoSubject = new BehaviorSubject<ItemCarrito[]>([]);
-  public carrito$ = this.carritoSubject.asObservable();
+  public carrito$: Observable<ItemCarrito[]> = this.carritoSubject.asObservable();
+  
+  private metodoRetiroSource = new BehaviorSubject<string>('retiro_tienda');
+  public metodoRetiro$: Observable<string> = this.metodoRetiroSource.asObservable();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.cargarDesdeStorage();
     }
   }
-  
-  
 
   agregar(item: ItemCarrito): void {
     const itemExistente = this.carritoItems.find(i => i.id === item.id);
@@ -67,27 +68,43 @@ export class CarritoService {
     return this.carritoItems.find(item => item.id === id);
   }
 
+  setMetodoRetiro(metodo: string): void {
+    this.metodoRetiroSource.next(metodo);
+    this.guardarEnStorage();
+  }
+
+  getMetodoRetiro(): string {
+    return this.metodoRetiroSource.value;
+  }
+
+  getCarritoActual(): ItemCarrito[] {
+    return [...this.carritoItems];
+  }
+
   private actualizarCarrito(): void {
     this.carritoSubject.next([...this.carritoItems]);
   }
 
-  //Almacenamiento en localStorage
   private guardarEnStorage(): void {
-    localStorage.setItem('carrito', JSON.stringify(this.carritoItems));
+    const carritoData = {
+      items: this.carritoItems,
+      metodoRetiro: this.metodoRetiroSource.value
+    };
+    localStorage.setItem('carrito', JSON.stringify(carritoData));
   }
 
   private cargarDesdeStorage(): void {
     const data = localStorage.getItem('carrito');
     if (data) {
       try {
-        this.carritoItems = JSON.parse(data);
+        const parsedData = JSON.parse(data);
+        this.carritoItems = parsedData.items || [];
+        this.metodoRetiroSource.next(parsedData.metodoRetiro || 'retiro_tienda');
         this.actualizarCarrito();
       } catch (error) {
-        console.error(' Error al cargar carrito desde localStorage:', error);
+        console.error('Error al cargar carrito desde localStorage:', error);
         localStorage.removeItem('carrito');
       }
     }
   }
-  
-  
 }

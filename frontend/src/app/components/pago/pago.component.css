@@ -2,122 +2,176 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
-  background: radial-gradient(circle at center, #1a1a1e 0%, #121215 100%);
+  min-height: 100vh;
   font-family: 'DM Sans', sans-serif;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .pago-container {
-  background: linear-gradient(145deg, #252529 0%, #1e1e22 100%);
-  padding: clamp(1.5rem, 5vw, 2.5rem);
-  border-radius: clamp(0.75rem, 2vw, 1.25rem);
+  background: #0a0a0a;
+  padding: 3rem;
+  border-radius: 16px;
   box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.3),
-    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    0 15px 35px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   text-align: center;
-  width: 90%;
-  max-width: min(420px, 90vw);
-  color: #f4f4f5;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  max-width: 480px;
+  color: #e5e5e5;
   position: relative;
   overflow: hidden;
-  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Responsive typography */
+.pago-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
 h2 {
-  margin-bottom: clamp(1rem, 4vw, 1.75rem);
-  font-size: clamp(1.4rem, 5vw, 1.8rem);
-  font-weight: 600;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 500;
   color: #ffffff;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   position: relative;
-  display: inline-block;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffffff, transparent);
 }
 
 .price-display {
-  font-size: clamp(1.2rem, 4vw, 1.5rem);
-  margin: clamp(1rem, 3vw, 1.5rem) 0;
+  font-size: 2.8rem;
+  margin: 2.5rem 0;
+  font-weight: 400;
+  color: #ffffff;
+  font-feature-settings: "tnum";
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
 }
 
-/* Responsive elements */
+.price-display::before,
+.price-display::after {
+  content: '•';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
+}
+
+.price-display::before {
+  left: -20px;
+}
+
+.price-display::after {
+  right: -20px;
+}
+
 #paypal-button-container {
-  margin-top: clamp(1rem, 3vw, 1.5rem);
-  min-height: 40px; /* Ensure button has minimum height */
+  margin: 2.5rem 0;
+  min-height: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .payment-methods {
-  font-size: clamp(0.75rem, 3vw, 0.85rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #a3a3a3;
+  margin-top: 2rem;
   flex-wrap: wrap;
-  row-gap: 0.25rem;
+  letter-spacing: 0.5px;
+}
+
+.payment-methods span {
+  position: relative;
+}
+
+.payment-methods span:not(:last-child)::after {
+  content: '|';
+  position: absolute;
+  right: -0.6rem;
+  color: rgba(255, 255, 255, 0.1);
 }
 
 .security-badge {
-  font-size: clamp(0.7rem, 3vw, 0.8rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  color: #d4d4d4;
+  margin-top: 2rem;
+  padding: 0.7rem 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Mobile-specific adjustments */
-@media (max-width: 480px) {
-  :host {
-    min-height: 70vh;
-    padding: 0.5rem;
-  }
+.security-badge svg {
+  width: 16px;
+  height: 16px;
+  fill: #d4d4d4;
+}
 
+/* Efecto de borde sutil */
+.pago-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .pago-container {
-    padding: 1.25rem;
-    width: 95%;
-  }
-
-  .price-display span {
-    padding: 0.4rem 0.8rem;
-  }
-
-  /* Stack payment methods on very small screens */
-  .payment-methods {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-  }
-}
-
-/* Tablet adjustments */
-@media (min-width: 481px) and (max-width: 768px) {
-  .pago-container {
-    max-width: 380px;
-  }
-}
-
-/* Large screen enhancements */
-@media (min-width: 1200px) {
-  .pago-container {
-    max-width: 450px;
-  }
-}
-
-/* Landscape mobile optimization */
-@media (max-height: 500px) and (orientation: landscape) {
-  :host {
-    min-height: 90vh;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: more) {
-  .pago-container {
-    border: 2px solid #6d28d9;
+    padding: 2rem;
   }
   
-  h2::after {
-    height: 3px;
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .price-display {
+    font-size: 2.2rem;
   }
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  #paypal-button-container {
-    transition: none;
+/* Animación sutil al cargar */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pago-container {
+  animation: fadeIn 0.6s ease-out forwards;
 }
